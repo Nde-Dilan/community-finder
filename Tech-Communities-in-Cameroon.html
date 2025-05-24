@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Communities Finder - Cameroon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#009639',secondary:'#CE1126'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        .cameroon-gradient {
+            background: linear-gradient(135deg, rgba(0, 150, 57, 0.1), rgba(206, 17, 38, 0.1), rgba(252, 209, 22, 0.1));
+        }
+        .map-container {
+            background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+        .custom-checkbox:checked {
+            background-color: #009639;
+            border-color: #009639;
+        }
+        .custom-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .custom-range {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            outline: none;
+        }
+        .custom-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #009639;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .custom-range::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            background: #009639;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e5e7eb;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .switch-slider {
+            background-color: #009639;
+        }
+        input:checked + .switch-slider:before {
+            transform: translateX(22px);
+        }
+        .timeline-connector {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: #009639;
+            transform: translateX(-50%);
+        }
+        .timeline-dot {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #009639;
+            left: 50%;
+            top: 40px;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+        @media (max-width: 768px) {
+            .timeline-connector {
+                left: 20px;
+            }
+            .timeline-dot {
+                left: 20px;
+            }
+        }
+        .pulse {
+            box-shadow: 0 0 0 rgba(206, 17, 38, 0.4);
+            animation: pulse 2s infinite;
+            border-radius: 50%;
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(206, 17, 38, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(206, 17, 38, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(206, 17, 38, 0);
+            }
+        }
+        .carousel {
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .carousel::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+            
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#communities" class="text-gray-700 hover:text-primary font-medium">Communities</a>
+                <a href="#events" class="text-gray-700 hover:text-primary font-medium">Events</a>
+                <a href="#map" class="text-gray-700 hover:text-primary font-medium">Map</a>
+                <a href="#news" class="text-gray-700 hover:text-primary font-medium">News</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary font-medium">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button class="hidden md:flex items-center justify-center px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-white transition duration-300 !rounded-button whitespace-nowrap">
+                    Sign In
+                </button>
+                <button class="hidden md:flex items-center justify-center px-4 py-2 bg-primary text-white hover:bg-primary/90 transition duration-300 !rounded-button whitespace-nowrap">
+                    Join Community
+                </button>
+                <div class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700 cursor-pointer" id="mobile-menu-button">
+                    <i class="ri-menu-line ri-lg"></i>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white w-full hidden">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#communities" class="text-gray-700 hover:text-primary font-medium py-2 border-b border-gray-100">Communities</a>
+                <a href="#events" class="text-gray-700 hover:text-primary font-medium py-2 border-b border-gray-100">Events</a>
+                <a href="#map" class="text-gray-700 hover:text-primary font-medium py-2 border-b border-gray-100">Map</a>
+                <a href="#news" class="text-gray-700 hover:text-primary font-medium py-2 border-b border-gray-100">News</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary font-medium py-2 border-b border-gray-100">Contact</a>
+                <div class="flex space-x-3 py-2">
+                    <button class="flex-1 px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-white transition duration-300 !rounded-button whitespace-nowrap">
+                        Sign In
+                    </button>
+                    <button class="flex-1 px-4 py-2 bg-primary text-white hover:bg-primary/90 transition duration-300 !rounded-button whitespace-nowrap">
+                        Join
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=A%20beautiful%20panoramic%20view%20of%20Cameroon%20landscape%20with%20tech%20elements%2C%20modern%20city%20skyline%20in%20the%20distance%2C%20geometric%20patterns%20in%20green%2C%20red%2C%20and%20yellow%20colors%20representing%20Cameroon%20flag%2C%20subtle%20tech-related%20symbols%2C%20clean%20modern%20design%2C%20soft%20lighting&width=1920&height=1080&seq=hero1&orientation=landscape'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="container mx-auto px-4 py-20 md:py-32 relative z-10">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">Discover Cameroon's Tech Communities</h1>
+                <p class="text-lg md:text-xl text-white/90 mb-8">Connect with innovative tech groups, attend local events, and grow your network across Cameroon's thriving digital ecosystem.</p>
+                
+                <div class="bg-white p-2 rounded-lg shadow-lg mb-8 max-w-2xl">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 flex items-center justify-center text-gray-400">
+                            <i class="ri-search-line ri-lg"></i>
+                        </div>
+                        <input type="text" placeholder="Search communities, events, or locations..." class="w-full py-2 px-3 focus:outline-none text-gray-700 border-none">
+                        <button class="ml-2 px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                            Search
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="px-6 py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap flex items-center justify-center">
+                        <i class="ri-community-line ri-lg mr-2"></i>
+                        Explore Communities
+                    </button>
+                    <button class="px-6 py-3 bg-white text-primary font-medium border-2 border-white hover:bg-white/90 !rounded-button whitespace-nowrap flex items-center justify-center">
+                        <i class="ri-calendar-event-line ri-lg mr-2"></i>
+                        Find Events
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section id="map" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Explore Tech Communities Across Cameroon</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Discover tech communities and upcoming events throughout Cameroon with our interactive map. Filter by region, category, or event type.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <!-- Map Filters Sidebar -->
+                    <div class="w-full md:w-1/4 bg-gray-50 p-5 border-r border-gray-200">
+                        <h3 class="font-semibold text-lg mb-4">Filters</h3>
+                        
+                        <div class="mb-5">
+                            <label class="block text-gray-700 font-medium mb-2">Region</label>
+                            <select class="w-full bg-white border border-gray-300 rounded px-3 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                                <option>All Regions</option>
+                                <option>Littoral</option>
+                                <option>Centre</option>
+                                <option>South West</option>
+                                <option>North West</option>
+                                <option>West</option>
+                                <option>East</option>
+                                <option>Adamawa</option>
+                                <option>North</option>
+                                <option>Far North</option>
+                                <option>South</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-5">
+                            <label class="block text-gray-700 font-medium mb-2">Community Type</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="custom-checkbox mr-2" id="type-software">
+                                    <label for="type-software" class="text-gray-600">Software Development</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="custom-checkbox mr-2" id="type-ai">
+                                    <label for="type-ai" class="text-gray-600">AI & Machine Learning</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="custom-checkbox mr-2" id="type-startup">
+                                    <label for="type-startup" class="text-gray-600">Startup Ecosystem</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="custom-checkbox mr-2" id="type-design">
+                                    <label for="type-design" class="text-gray-600">Design & UX</label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" class="custom-checkbox mr-2" id="type-blockchain">
+                                    <label for="type-blockchain" class="text-gray-600">Blockchain</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-5">
+                            <label class="block text-gray-700 font-medium mb-2">Member Size</label>
+                            <input type="range" min="0" max="1000" value="500" class="custom-range" id="member-size">
+                            <div class="flex justify-between text-sm text-gray-500 mt-1">
+                                <span>0</span>
+                                <span id="member-size-value">500</span>
+                                <span>1000+</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-5">
+                            <label class="block text-gray-700 font-medium mb-2">Show Events</label>
+                            <label class="custom-switch">
+                                <input type="checkbox" checked>
+                                <span class="switch-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <button class="w-full px-4 py-2 bg-primary text-white font-medium !rounded-button whitespace-nowrap">
+                            Apply Filters
+                        </button>
+                    </div>
+                    
+                    <!-- Map Container -->
+                    <div class="w-full md:w-3/4">
+                        <div class="map-container h-[500px] relative">
+                            <!-- Map Markers (Placeholder) -->
+                            <div class="absolute top-1/4 left-1/3 w-6 h-6 bg-primary rounded-full pulse flex items-center justify-center text-white text-xs font-bold">12</div>
+                            <div class="absolute top-1/3 left-1/2 w-6 h-6 bg-secondary rounded-full pulse flex items-center justify-center text-white text-xs font-bold">8</div>
+                            <div class="absolute top-2/3 left-1/4 w-6 h-6 bg-yellow-500 rounded-full pulse flex items-center justify-center text-white text-xs font-bold">5</div>
+                            <div class="absolute top-1/2 left-2/3 w-6 h-6 bg-primary rounded-full pulse flex items-center justify-center text-white text-xs font-bold">15</div>
+                            
+                            <!-- Map Controls -->
+                            <div class="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2">
+                                <div class="flex flex-col space-y-2">
+                                    <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary">
+                                        <i class="ri-add-line ri-lg"></i>
+                                    </button>
+                                    <div class="w-full h-px bg-gray-200"></div>
+                                    <button class="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-primary">
+                                        <i class="ri-subtract-line ri-lg"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Map Legend -->
+                            <div class="absolute bottom-4 left-4 bg-white rounded-lg shadow-md p-3">
+                                <div class="text-sm font-medium mb-2">Legend</div>
+                                <div class="flex items-center mb-1">
+                                    <div class="w-3 h-3 bg-primary rounded-full mr-2"></div>
+                                    <span class="text-xs text-gray-600">Software Communities</span>
+                                </div>
+                                <div class="flex items-center mb-1">
+                                    <div class="w-3 h-3 bg-secondary rounded-full mr-2"></div>
+                                    <span class="text-xs text-gray-600">Startup Hubs</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                                    <span class="text-xs text-gray-600">Upcoming Events</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Communities Carousel -->
+    <section id="communities" class="py-16 cameroon-gradient">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-10">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-2">Featured Communities</h2>
+                    <p class="text-gray-600">Discover the most active tech communities in Cameroon</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button id="prev-btn" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-white hover:text-primary transition">
+                        <i class="ri-arrow-left-s-line ri-lg"></i>
+                    </button>
+                    <button id="next-btn" class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 text-gray-600 hover:bg-white hover:text-primary transition">
+                        <i class="ri-arrow-right-s-line ri-lg"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div id="communities-carousel" class="carousel flex space-x-6 overflow-x-auto pb-6">
+                    <!-- Community Card 1 -->
+                    <div class="min-w-[300px] bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 hover:shadow-lg transition duration-300">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center">
+                            <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20software%20development%20community%20in%20Cameroon%2C%20featuring%20abstract%20code%20symbols%2C%20clean%20lines%2C%20blue%20and%20green%20colors%2C%20minimalist%20design&width=300&height=160&seq=com1&orientation=landscape" alt="Douala Developers" class="h-24 object-contain">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-xl mb-2">Douala Developers</h3>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-map-pin-line mr-1"></i>
+                                <span class="text-sm">Douala, Littoral</span>
+                            </div>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-user-line mr-1"></i>
+                                <span class="text-sm">785 members</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">A vibrant community of software developers sharing knowledge and building innovative solutions for local challenges.</p>
+                            <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Community Card 2 -->
+                    <div class="min-w-[300px] bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 hover:shadow-lg transition duration-300">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center">
+                            <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20tech%20startup%20hub%20in%20Cameroon%2C%20featuring%20abstract%20geometric%20shapes%2C%20red%20and%20yellow%20colors%2C%20minimalist%20design%20with%20tech%20elements&width=300&height=160&seq=com2&orientation=landscape" alt="Yaounde Tech Hub" class="h-24 object-contain">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-xl mb-2">Yaounde Tech Hub</h3>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-map-pin-line mr-1"></i>
+                                <span class="text-sm">Yaounde, Centre</span>
+                            </div>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-user-line mr-1"></i>
+                                <span class="text-sm">1,245 members</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">The capital's premier innovation space connecting entrepreneurs, developers, and investors to build Cameroon's digital future.</p>
+                            <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Community Card 3 -->
+                    <div class="min-w-[300px] bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 hover:shadow-lg transition duration-300">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center">
+                            <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20an%20AI%20and%20data%20science%20community%20in%20Cameroon%2C%20featuring%20neural%20network%20patterns%2C%20purple%20and%20blue%20colors%2C%20minimalist%20tech%20design&width=300&height=160&seq=com3&orientation=landscape" alt="Cameroon AI Alliance" class="h-24 object-contain">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-xl mb-2">Cameroon AI Alliance</h3>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-map-pin-line mr-1"></i>
+                                <span class="text-sm">Multiple Locations</span>
+                            </div>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-user-line mr-1"></i>
+                                <span class="text-sm">632 members</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">Advancing artificial intelligence and machine learning expertise through workshops, projects and research collaborations.</p>
+                            <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Community Card 4 -->
+                    <div class="min-w-[300px] bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 hover:shadow-lg transition duration-300">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center">
+                            <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20women%20in%20tech%20community%20in%20Cameroon%2C%20featuring%20abstract%20feminine%20tech%20symbols%2C%20teal%20and%20purple%20colors%2C%20minimalist%20design&width=300&height=160&seq=com4&orientation=landscape" alt="Women Techmakers Buea" class="h-24 object-contain">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-xl mb-2">Women Techmakers Buea</h3>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-map-pin-line mr-1"></i>
+                                <span class="text-sm">Buea, South West</span>
+                            </div>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-user-line mr-1"></i>
+                                <span class="text-sm">418 members</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">Empowering women in technology through mentorship, skill development workshops and networking opportunities.</p>
+                            <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Community Card 5 -->
+                    <div class="min-w-[300px] bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 hover:shadow-lg transition duration-300">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center">
+                            <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20blockchain%20technology%20community%20in%20Cameroon%2C%20featuring%20blockchain%20pattern%20elements%2C%20green%20and%20blue%20colors%2C%20minimalist%20tech%20design&width=300&height=160&seq=com5&orientation=landscape" alt="Cameroon Blockchain Network" class="h-24 object-contain">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-xl mb-2">Cameroon Blockchain Network</h3>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-map-pin-line mr-1"></i>
+                                <span class="text-sm">Douala & Yaounde</span>
+                            </div>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-user-line mr-1"></i>
+                                <span class="text-sm">295 members</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">Exploring blockchain applications for financial inclusion, supply chain and digital identity solutions in Cameroon.</p>
+                            <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Community Card 6 -->
+                    <div class="min-w-[300px] bg-white rounded-lg shadow-md overflow-hidden flex-shrink-0 hover:shadow-lg transition duration-300">
+                        <div class="h-40 bg-gray-100 flex items-center justify-center">
+                            <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20UX%20design%20community%20in%20Cameroon%2C%20featuring%20design%20tool%20symbols%2C%20orange%20and%20blue%20colors%2C%20minimalist%20creative%20design&width=300&height=160&seq=com6&orientation=landscape" alt="Cameroon UX Community" class="h-24 object-contain">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-xl mb-2">Cameroon UX Community</h3>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-map-pin-line mr-1"></i>
+                                <span class="text-sm">Limbe, South West</span>
+                            </div>
+                            <div class="flex items-center text-gray-500 mb-3">
+                                <i class="ri-user-line mr-1"></i>
+                                <span class="text-sm">326 members</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4">Designers creating user-centered digital experiences with a focus on local context and accessibility considerations.</p>
+                            <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                View Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communities Directory -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Communities Directory</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Browse our comprehensive directory of tech communities across Cameroon. Filter by region, category, or search for specific groups.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Filters Sidebar -->
+                <div class="w-full md:w-1/4 bg-gray-50 rounded-lg p-6">
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-lg mb-4">Search</h3>
+                        <div class="relative">
+                            <input type="text" placeholder="Search communities..." class="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                            <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i class="ri-search-line"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-lg mb-4">Regions</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="region-all" checked>
+                                <label for="region-all" class="text-gray-600">All Regions</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="region-littoral">
+                                <label for="region-littoral" class="text-gray-600">Littoral</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="region-centre">
+                                <label for="region-centre" class="text-gray-600">Centre</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="region-sw">
+                                <label for="region-sw" class="text-gray-600">South West</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="region-nw">
+                                <label for="region-nw" class="text-gray-600">North West</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="region-west">
+                                <label for="region-west" class="text-gray-600">West</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-lg mb-4">Categories</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="cat-software" checked>
+                                <label for="cat-software" class="text-gray-600">Software Development</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="cat-ai" checked>
+                                <label for="cat-ai" class="text-gray-600">AI & Data Science</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="cat-startup" checked>
+                                <label for="cat-startup" class="text-gray-600">Startup Ecosystem</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="cat-design" checked>
+                                <label for="cat-design" class="text-gray-600">Design & UX</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="custom-checkbox mr-2" id="cat-blockchain" checked>
+                                <label for="cat-blockchain" class="text-gray-600">Blockchain</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h3 class="font-semibold text-lg mb-4">Member Size</h3>
+                        <input type="range" min="0" max="1000" value="0" class="custom-range" id="member-size-filter">
+                        <div class="flex justify-between text-sm text-gray-500 mt-1">
+                            <span>Any</span>
+                            <span id="member-size-filter-value">0+</span>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full px-4 py-2 bg-primary text-white font-medium !rounded-button whitespace-nowrap">
+                        Apply Filters
+                    </button>
+                </div>
+                
+                <!-- Communities Grid -->
+                <div class="w-full md:w-3/4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Community Card 1 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                            <div class="h-40 bg-gray-100 flex items-center justify-center">
+                                <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20software%20development%20community%20in%20Cameroon%2C%20featuring%20abstract%20code%20symbols%2C%20clean%20lines%2C%20blue%20and%20green%20colors%2C%20minimalist%20design&width=300&height=160&seq=com1&orientation=landscape" alt="Douala Developers" class="h-24 object-contain">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-xl mb-2">Douala Developers</h3>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Douala, Littoral</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">785 members</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">JavaScript</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Python</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs">Web Dev</span>
+                                </div>
+                                <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                    View Profile
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Community Card 2 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                            <div class="h-40 bg-gray-100 flex items-center justify-center">
+                                <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20tech%20startup%20hub%20in%20Cameroon%2C%20featuring%20abstract%20geometric%20shapes%2C%20red%20and%20yellow%20colors%2C%20minimalist%20design%20with%20tech%20elements&width=300&height=160&seq=com2&orientation=landscape" alt="Yaounde Tech Hub" class="h-24 object-contain">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-xl mb-2">Yaounde Tech Hub</h3>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Yaounde, Centre</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">1,245 members</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-red-100 text-red-800 rounded text-xs">Startups</span>
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs">Innovation</span>
+                                    <span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded text-xs">Coworking</span>
+                                </div>
+                                <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                    View Profile
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Community Card 3 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                            <div class="h-40 bg-gray-100 flex items-center justify-center">
+                                <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20an%20AI%20and%20data%20science%20community%20in%20Cameroon%2C%20featuring%20neural%20network%20patterns%2C%20purple%20and%20blue%20colors%2C%20minimalist%20tech%20design&width=300&height=160&seq=com3&orientation=landscape" alt="Cameroon AI Alliance" class="h-24 object-contain">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-xl mb-2">Cameroon AI Alliance</h3>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Multiple Locations</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">632 members</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs">AI</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">ML</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Data Science</span>
+                                </div>
+                                <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                    View Profile
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Community Card 4 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                            <div class="h-40 bg-gray-100 flex items-center justify-center">
+                                <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20women%20in%20tech%20community%20in%20Cameroon%2C%20featuring%20abstract%20feminine%20tech%20symbols%2C%20teal%20and%20purple%20colors%2C%20minimalist%20design&width=300&height=160&seq=com4&orientation=landscape" alt="Women Techmakers Buea" class="h-24 object-contain">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-xl mb-2">Women Techmakers Buea</h3>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Buea, South West</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">418 members</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-teal-100 text-teal-800 rounded text-xs">Women in Tech</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs">Mentorship</span>
+                                    <span class="px-2 py-1 bg-pink-100 text-pink-800 rounded text-xs">Diversity</span>
+                                </div>
+                                <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                    View Profile
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Community Card 5 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                            <div class="h-40 bg-gray-100 flex items-center justify-center">
+                                <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20blockchain%20technology%20community%20in%20Cameroon%2C%20featuring%20blockchain%20pattern%20elements%2C%20green%20and%20blue%20colors%2C%20minimalist%20tech%20design&width=300&height=160&seq=com5&orientation=landscape" alt="Cameroon Blockchain Network" class="h-24 object-contain">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-xl mb-2">Cameroon Blockchain Network</h3>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Douala & Yaounde</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">295 members</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">Blockchain</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">Crypto</span>
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded text-xs">Web3</span>
+                                </div>
+                                <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                    View Profile
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Community Card 6 -->
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                            <div class="h-40 bg-gray-100 flex items-center justify-center">
+                                <img src="https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20UX%20design%20community%20in%20Cameroon%2C%20featuring%20design%20tool%20symbols%2C%20orange%20and%20blue%20colors%2C%20minimalist%20creative%20design&width=300&height=160&seq=com6&orientation=landscape" alt="Cameroon UX Community" class="h-24 object-contain">
+                            </div>
+                            <div class="p-5">
+                                <h3 class="font-bold text-xl mb-2">Cameroon UX Community</h3>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Limbe, South West</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-3">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">326 members</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-orange-100 text-orange-800 rounded text-xs">UX Design</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">UI</span>
+                                    <span class="px-2 py-1 bg-indigo-100 text-indigo-800 rounded text-xs">Product</span>
+                                </div>
+                                <button class="w-full px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                    View Profile
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 flex justify-center">
+                        <button class="px-6 py-3 bg-white border border-gray-300 text-gray-700 font-medium !rounded-button whitespace-nowrap flex items-center justify-center hover:bg-gray-50">
+                            <i class="ri-refresh-line ri-lg mr-2"></i>
+                            Load More Communities
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Timeline -->
+    <section id="events" class="py-16 cameroon-gradient">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Upcoming Tech Events</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Stay updated with the latest tech events, workshops, and meetups happening across Cameroon's vibrant tech ecosystem.</p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline Connector (Desktop) -->
+                <div class="hidden md:block timeline-connector"></div>
+                
+                <div class="space-y-8 relative">
+                    <!-- Event 1 -->
+                    <div class="md:flex items-start relative">
+                        <div class="hidden md:block timeline-dot"></div>
+                        <div class="md:w-1/2 md:pr-12 md:text-right mb-8 md:mb-0">
+                            <div class="bg-white rounded-lg shadow-md p-6 inline-block">
+                                <div class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-3">May 28, 2025</div>
+                                <h3 class="text-xl font-bold mb-2">Douala Developer Conference</h3>
+                                <p class="text-gray-600 mb-3">The largest annual gathering of software developers in Cameroon featuring workshops, talks, and networking opportunities.</p>
+                                <div class="flex items-center justify-end text-gray-500 mb-4">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Akwa Palace Hotel, Douala</span>
+                                </div>
+                                <div class="flex items-center justify-end text-gray-500 mb-4">
+                                    <i class="ri-time-line mr-1"></i>
+                                    <span class="text-sm">09:00 AM - 05:00 PM</span>
+                                </div>
+                                <div class="flex items-center justify-end text-gray-500 mb-4">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">Hosted by Douala Developers</span>
+                                </div>
+                                <button class="px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:hidden">
+                            <!-- Mobile Timeline Dot -->
+                            <div class="w-4 h-4 bg-primary rounded-full absolute left-0 top-6 transform -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 2 -->
+                    <div class="md:flex items-start relative">
+                        <div class="hidden md:block timeline-dot"></div>
+                        <div class="md:w-1/2 md:pl-12 mb-8 md:mb-0 md:order-2">
+                            <div class="bg-white rounded-lg shadow-md p-6 inline-block">
+                                <div class="inline-block px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm font-medium mb-3">June 10, 2025</div>
+                                <h3 class="text-xl font-bold mb-2">AI Summit Cameroon</h3>
+                                <p class="text-gray-600 mb-3">Exploring artificial intelligence applications and opportunities in the Cameroonian context with industry experts.</p>
+                                <div class="flex items-center text-gray-500 mb-4">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Hilton Hotel, Yaounde</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-4">
+                                    <i class="ri-time-line mr-1"></i>
+                                    <span class="text-sm">10:00 AM - 04:00 PM</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-4">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">Hosted by Cameroon AI Alliance</span>
+                                </div>
+                                <button class="px-4 py-2 bg-secondary text-white !rounded-button whitespace-nowrap">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:order-1 md:hidden">
+                            <!-- Mobile Timeline Dot -->
+                            <div class="w-4 h-4 bg-secondary rounded-full absolute left-0 top-6 transform -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 3 -->
+                    <div class="md:flex items-start relative">
+                        <div class="hidden md:block timeline-dot"></div>
+                        <div class="md:w-1/2 md:pr-12 md:text-right mb-8 md:mb-0">
+                            <div class="bg-white rounded-lg shadow-md p-6 inline-block">
+                                <div class="inline-block px-3 py-1 bg-yellow-500/10 text-yellow-600 rounded-full text-sm font-medium mb-3">June 24, 2025</div>
+                                <h3 class="text-xl font-bold mb-2">Women in Tech Bootcamp</h3>
+                                <p class="text-gray-600 mb-3">A three-day intensive coding bootcamp for women looking to start or advance their careers in technology.</p>
+                                <div class="flex items-center justify-end text-gray-500 mb-4">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Silicon Mountain Hub, Buea</span>
+                                </div>
+                                <div class="flex items-center justify-end text-gray-500 mb-4">
+                                    <i class="ri-time-line mr-1"></i>
+                                    <span class="text-sm">09:00 AM - 05:00 PM (3 days)</span>
+                                </div>
+                                <div class="flex items-center justify-end text-gray-500 mb-4">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">Hosted by Women Techmakers Buea</span>
+                                </div>
+                                <button class="px-4 py-2 bg-yellow-500 text-white !rounded-button whitespace-nowrap">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:hidden">
+                            <!-- Mobile Timeline Dot -->
+                            <div class="w-4 h-4 bg-yellow-500 rounded-full absolute left-0 top-6 transform -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Event 4 -->
+                    <div class="md:flex items-start relative">
+                        <div class="hidden md:block timeline-dot"></div>
+                        <div class="md:w-1/2 md:pl-12 mb-8 md:mb-0 md:order-2">
+                            <div class="bg-white rounded-lg shadow-md p-6 inline-block">
+                                <div class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-3">July 15, 2025</div>
+                                <h3 class="text-xl font-bold mb-2">Blockchain & Fintech Forum</h3>
+                                <p class="text-gray-600 mb-3">Discussing the future of financial technology and blockchain applications in the Cameroonian economy.</p>
+                                <div class="flex items-center text-gray-500 mb-4">
+                                    <i class="ri-map-pin-line mr-1"></i>
+                                    <span class="text-sm">Sawa Hotel, Douala</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-4">
+                                    <i class="ri-time-line mr-1"></i>
+                                    <span class="text-sm">10:00 AM - 03:00 PM</span>
+                                </div>
+                                <div class="flex items-center text-gray-500 mb-4">
+                                    <i class="ri-user-line mr-1"></i>
+                                    <span class="text-sm">Hosted by Cameroon Blockchain Network</span>
+                                </div>
+                                <button class="px-4 py-2 bg-primary text-white !rounded-button whitespace-nowrap">
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:order-1 md:hidden">
+                            <!-- Mobile Timeline Dot -->
+                            <div class="w-4 h-4 bg-primary rounded-full absolute left-0 top-6 transform -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 flex justify-center">
+                    <button class="px-6 py-3 bg-white border border-gray-300 text-gray-700 font-medium !rounded-button whitespace-nowrap flex items-center justify-center hover:bg-gray-50">
+                        <i class="ri-calendar-line ri-lg mr-2"></i>
+                        View All Events
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Spotlights -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Community Spotlights</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Learn about the inspiring stories and achievements of Cameroon's leading tech communities.</p>
+            </div>
+            
+            <!-- Spotlight 1 -->
+            <div class="flex flex-col md:flex-row items-center mb-16 gap-8">
+                <div class="w-full md:w-1/2 order-2 md:order-1">
+                    <h3 class="text-2xl font-bold mb-4">Douala Developers: Building Local Solutions</h3>
+                    <p class="text-gray-600 mb-4">Founded in 2018, Douala Developers has grown from a small meetup group to one of Cameroon's most influential tech communities with over 780 members. Their mission is to nurture local talent and build solutions that address Cameroon's unique challenges.</p>
+                    <p class="text-gray-600 mb-6">The community hosts monthly coding sessions, hackathons, and mentorship programs that have helped launch several successful startups and connected dozens of developers with job opportunities both locally and internationally.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-full mr-3">
+                                <i class="ri-user-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Members</div>
+                                <div class="font-semibold">785+</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-full mr-3">
+                                <i class="ri-calendar-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Events Hosted</div>
+                                <div class="font-semibold">124</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-full mr-3">
+                                <i class="ri-building-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Startups Launched</div>
+                                <div class="font-semibold">17</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="px-6 py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap flex items-center justify-center">
+                        <i class="ri-profile-line ri-lg mr-2"></i>
+                        View Full Profile
+                    </button>
+                </div>
+                <div class="w-full md:w-1/2 order-1 md:order-2">
+                    <img src="https://readdy.ai/api/search-image?query=A%20diverse%20group%20of%20young%20African%20software%20developers%20collaborating%20in%20a%20modern%20tech%20workspace%20in%20Douala%2C%20Cameroon.%20They%20are%20gathered%20around%20computers%2C%20engaged%20in%20coding%20and%20discussion.%20The%20space%20has%20a%20professional%20yet%20creative%20atmosphere%20with%20subtle%20green%20and%20red%20Cameroon%20colors%20in%20the%20decor.%20Natural%20lighting%2C%20modern%20office%20setting.&width=600&height=400&seq=spot1&orientation=landscape" alt="Douala Developers Community" class="rounded-lg shadow-lg w-full h-auto">
+                </div>
+            </div>
+            
+            <!-- Spotlight 2 -->
+            <div class="flex flex-col md:flex-row items-center mb-16 gap-8">
+                <div class="w-full md:w-1/2">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20women%20tech%20professionals%20in%20Buea%2C%20Cameroon%2C%20engaged%20in%20a%20coding%20workshop.%20The%20diverse%20group%20of%20African%20women%20are%20working%20on%20laptops%2C%20some%20teaching%20others.%20The%20space%20is%20bright%20and%20modern%20with%20subtle%20tech%20elements%20and%20hints%20of%20Cameroon%20national%20colors%20in%20the%20background.%20Professional%20atmosphere%2C%20collaborative%20environment.&width=600&height=400&seq=spot2&orientation=landscape" alt="Women Techmakers Buea" class="rounded-lg shadow-lg w-full h-auto">
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4">Women Techmakers Buea: Empowering Female Technologists</h3>
+                    <p class="text-gray-600 mb-4">Women Techmakers Buea is dedicated to increasing female representation in Cameroon's tech industry. Since its founding in 2019, the community has trained over 400 women in various technology skills from web development to data science.</p>
+                    <p class="text-gray-600 mb-6">Their signature programs include a quarterly coding bootcamp, monthly mentorship sessions, and an annual women in tech conference that attracts participants from across Central Africa.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-secondary/10 text-secondary rounded-full mr-3">
+                                <i class="ri-user-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Members</div>
+                                <div class="font-semibold">418+</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-secondary/10 text-secondary rounded-full mr-3">
+                                <i class="ri-women-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Women Trained</div>
+                                <div class="font-semibold">312</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-secondary/10 text-secondary rounded-full mr-3">
+                                <i class="ri-briefcase-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Job Placements</div>
+                                <div class="font-semibold">86</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="px-6 py-3 bg-secondary text-white font-medium !rounded-button whitespace-nowrap flex items-center justify-center">
+                        <i class="ri-profile-line ri-lg mr-2"></i>
+                        View Full Profile
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Spotlight 3 -->
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="w-full md:w-1/2 order-2 md:order-1">
+                    <h3 class="text-2xl font-bold mb-4">Cameroon AI Alliance: Advancing Artificial Intelligence</h3>
+                    <p class="text-gray-600 mb-4">The Cameroon AI Alliance brings together researchers, engineers, and entrepreneurs passionate about artificial intelligence and its applications in the African context. With chapters in multiple cities, they're building a national network of AI expertise.</p>
+                    <p class="text-gray-600 mb-6">Their initiatives include AI research collaborations with local universities, specialized training programs, and partnerships with international organizations to bring cutting-edge AI knowledge to Cameroon.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-blue-500/10 text-blue-500 rounded-full mr-3">
+                                <i class="ri-user-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Members</div>
+                                <div class="font-semibold">632+</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-blue-500/10 text-blue-500 rounded-full mr-3">
+                                <i class="ri-file-paper-2-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Research Papers</div>
+                                <div class="font-semibold">28</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center bg-gray-50 p-3 rounded-lg">
+                            <div class="w-10 h-10 flex items-center justify-center bg-blue-500/10 text-blue-500 rounded-full mr-3">
+                                <i class="ri-global-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-500">Chapters</div>
+                                <div class="font-semibold">5</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="px-6 py-3 bg-blue-500 text-white font-medium !rounded-button whitespace-nowrap flex items-center justify-center">
+                        <i class="ri-profile-line ri-lg mr-2"></i>
+                        View Full Profile
+                    </button>
+                </div>
+                <div class="w-full md:w-1/2 order-1 md:order-2">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20gathering%20of%20AI%20researchers%20and%20engineers%20in%20Cameroon%2C%20diverse%20group%20of%20African%20tech%20professionals%20analyzing%20data%20visualizations%20on%20large%20screens.%20Modern%20tech%20conference%20room%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.%20Professional%20atmosphere%2C%20collaborative%20environment%2C%20clean%20lighting.&width=600&height=400&seq=spot3&orientation=landscape" alt="Cameroon AI Alliance" class="rounded-lg shadow-lg w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Feed -->
+    <section id="news" class="py-16 cameroon-gradient">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Tech Community News</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Stay updated with the latest happenings, achievements, and announcements from Cameroon's tech ecosystem.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Item 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20tech%20conference%20or%20hackathon%20scene%20in%20Cameroon%2C%20with%20diverse%20African%20developers%20presenting%20their%20work%20on%20stage.%20Modern%20event%20space%20with%20audience%2C%20professional%20lighting%2C%20subtle%20Cameroon%20flag%20colors%20in%20the%20background%20decorations.&width=400&height=250&seq=news1&orientation=landscape" alt="Douala Hackathon Winners" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="flex items-center text-gray-500 mb-3">
+                            <i class="ri-calendar-line mr-1"></i>
+                            <span class="text-sm">May 20, 2025</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Douala Hackathon Winners Secure $50,000 Investment</h3>
+                        <p class="text-gray-600 mb-4">Team CodeCrafters from Douala Developers community won the annual hackathon with their innovative agricultural supply chain solution, securing major investment.</p>
+                        <div class="flex items-center text-primary">
+                            <span class="font-medium">Read More</span>
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20African%20women%20in%20tech%20at%20a%20workshop%20or%20training%20session%20in%20Cameroon.%20Women%20engaged%20with%20laptops%20and%20technology%2C%20collaborative%20learning%20environment.%20Modern%20tech%20space%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news2&orientation=landscape" alt="Women in Tech Bootcamp" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="flex items-center text-gray-500 mb-3">
+                            <i class="ri-calendar-line mr-1"></i>
+                            <span class="text-sm">May 15, 2025</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Women Techmakers Buea Launches Scholarship Program</h3>
+                        <p class="text-gray-600 mb-4">The community has partnered with Google to offer 50 scholarships for women pursuing careers in software development and data science.</p>
+                        <div class="flex items-center text-primary">
+                            <span class="font-medium">Read More</span>
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20tech%20startup%20founders%20or%20entrepreneurs%20in%20Cameroon%20meeting%20with%20international%20investors.%20Diverse%20group%20of%20African%20business%20professionals%20in%20discussion%20in%20a%20modern%20office%20setting%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news3&orientation=landscape" alt="Yaounde Tech Hub Expansion" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="flex items-center text-gray-500 mb-3">
+                            <i class="ri-calendar-line mr-1"></i>
+                            <span class="text-sm">May 10, 2025</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Yaounde Tech Hub Expands with New Innovation Center</h3>
+                        <p class="text-gray-600 mb-4">The community has opened a new 2,000 sqm facility with co-working spaces, event venues, and specialized labs for hardware prototyping.</p>
+                        <div class="flex items-center text-primary">
+                            <span class="font-medium">Read More</span>
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20tech%20professionals%20in%20Cameroon%20working%20with%20AI%20or%20data%20visualization%20technology.%20Diverse%20group%20of%20African%20tech%20experts%20analyzing%20data%20on%20screens%20in%20a%20modern%20office%20setting%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news4&orientation=landscape" alt="AI Alliance Partnership" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="flex items-center text-gray-500 mb-3">
+                            <i class="ri-calendar-line mr-1"></i>
+                            <span class="text-sm">May 5, 2025</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Cameroon AI Alliance Partners with Microsoft for Research Lab</h3>
+                        <p class="text-gray-600 mb-4">The partnership will establish Cameroon's first dedicated AI research laboratory with a focus on applications in healthcare and agriculture.</p>
+                        <div class="flex items-center text-primary">
+                            <span class="font-medium">Read More</span>
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20blockchain%20or%20fintech%20professionals%20in%20Cameroon%20at%20a%20conference%20or%20workshop.%20Diverse%20group%20of%20African%20tech%20experts%20engaged%20in%20discussion%20in%20a%20modern%20setting%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news5&orientation=landscape" alt="Blockchain Conference" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="flex items-center text-gray-500 mb-3">
+                            <i class="ri-calendar-line mr-1"></i>
+                            <span class="text-sm">April 28, 2025</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Cameroon Blockchain Network to Host Pan-African Conference</h3>
+                        <p class="text-gray-600 mb-4">The first-ever Pan-African Blockchain Conference will be held in Douala, bringing together experts from 15 African countries.</p>
+                        <div class="flex items-center text-primary">
+                            <span class="font-medium">Read More</span>
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- News Item 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20UX%20designers%20or%20creative%20tech%20professionals%20in%20Cameroon%20collaborating%20on%20a%20project.%20Diverse%20group%20of%20African%20designers%20working%20with%20design%20tools%20and%20prototypes%20in%20a%20modern%20creative%20space%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news6&orientation=landscape" alt="UX Design Awards" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <div class="flex items-center text-gray-500 mb-3">
+                            <i class="ri-calendar-line mr-1"></i>
+                            <span class="text-sm">April 22, 2025</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Cameroon UX Community Members Win African Design Awards</h3>
+                        <p class="text-gray-600 mb-4">Three members of the Cameroon UX Community received recognition at the prestigious African Design Awards for their innovative user interfaces.</p>
+                        <div class="flex items-center text-primary">
+                            <span class="font-medium">Read More</span>
+                            <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 flex justify-center">
+                <button class="px-6 py-3 bg-white border border-gray-300 text-gray-700 font-medium !rounded-button whitespace-nowrap flex items-center justify-center hover:bg-gray-50">
+                    <i class="ri-newspaper-line ri-lg mr-2"></i>
+                    View All News
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Hub -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Have questions about tech communities in Cameroon? Want to list your community? We're here to help.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="w-full md:w-1/2">
+                    <div class="bg-gray-50 rounded-lg p-8">
+                        <h3 class="text-2xl font-bold mb-6">Contact Us</h3>
+                        
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Enter your name">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Enter your email">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                                <select id="subject" class="w-full px-4 py-2 border border-gray-300 rounded pr-8 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary">
+                                    <option>General Inquiry</option>
+                                    <option>List My Community</option>
+                                    <option>Event Promotion</option>
+                                    <option>Partnership Opportunity</option>
+                                    <option>Technical Support</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="Type your message here..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full px-6 py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2">
+                    <div class="bg-gray-50 rounded-lg p-8 h-full">
+                        <h3 class="text-2xl font-bold mb-6">Submit Your Community</h3>
+                        <p class="text-gray-600 mb-6">Are you running a tech community in Cameroon? Get it listed on our platform to increase visibility and connect with more members.</p>
+                        
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-full mt-1 mr-4 flex-shrink-0">
+                                    <i class="ri-check-line ri-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Free Listing</h4>
+                                    <p class="text-gray-600 text-sm">Basic community profile with essential information</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-full mt-1 mr-4 flex-shrink-0">
+                                    <i class="ri-check-line ri-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Event Promotion</h4>
+                                    <p class="text-gray-600 text-sm">Share your community events on our calendar</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-full mt-1 mr-4 flex-shrink-0">
+                                    <i class="ri-check-line ri-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Networking Opportunities</h4>
+                                    <p class="text-gray-600 text-sm">Connect with other communities and potential partners</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-full mt-1 mr-4 flex-shrink-0">
+                                    <i class="ri-check-line ri-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Resource Access</h4>
+                                    <p class="text-gray-600 text-sm">Get access to exclusive resources for community growth</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full px-6 py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap flex items-center justify-center">
+                            <i class="ri-community-line ri-lg mr-2"></i>
+                            Submit Your Community
+                        </button>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-semibold mb-4">Connect With Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition">
+                                    <i class="ri-twitter-x-line"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition">
+                                    <i class="ri-facebook-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition">
+                                    <i class="ri-linkedin-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition">
+                                    <i class="ri-instagram-line"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-primary hover:text-white transition">
+                                    <i class="ri-whatsapp-line"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Newsletter Section -->
+    <section class="py-12 bg-primary">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold text-white mb-2">Stay Updated</h3>
+                    <p class="text-white/80">Subscribe to our newsletter for the latest tech community news and events.</p>
+                </div>
+                
+                <div class="w-full md:w-1/2 max-w-md">
+                    <div class="flex">
+                        <input type="email" placeholder="Enter your email address" class="w-full px-4 py-3 rounded-l-lg focus:outline-none border-none">
+                        <button class="px-6 py-3 bg-white text-primary font-medium rounded-r-lg whitespace-nowrap hover:bg-gray-100 transition">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-['Pacifico'] text-white mb-6">logo</h3>
+                    <p class="text-gray-400 mb-6">Connecting and empowering tech communities across Cameroon to foster innovation, collaboration, and growth.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="ri-twitter-x-line ri-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="ri-facebook-fill ri-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="ri-linkedin-fill ri-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="ri-instagram-line ri-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#communities" class="text-gray-400 hover:text-white transition">Communities</a></li>
+                        <li><a href="#events" class="text-gray-400 hover:text-white transition">Events</a></li>
+                        <li><a href="#map" class="text-gray-400 hover:text-white transition">Map</a></li>
+                        <li><a href="#news" class="text-gray-400 hover:text-white transition">News</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Communities</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Software Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">AI & Data Science</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Startup Ecosystem</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Design & UX</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blockchain</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Women in Tech</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Contact</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="ri-map-pin-line text-gray-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">Akwa, Douala, Cameroon</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-mail-line text-gray-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">info@techcommunities.cm</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="ri-phone-line text-gray-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">+237 677 889 900</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 mb-4 md:mb-0">© 2025 Tech Communities Finder. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 z-50">
+        <i class="ri-arrow-up-line ri-lg"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script id="mobile-menu-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+    </script>
+
+    <script id="carousel-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('communities-carousel');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            let scrollAmount = 0;
+            const cardWidth = 300 + 24; // card width + gap
+            
+            nextBtn.addEventListener('click', function() {
+                scrollAmount += cardWidth;
+                if (scrollAmount > carousel.scrollWidth - carousel.clientWidth) {
+                    scrollAmount = carousel.scrollWidth - carousel.clientWidth;
+                }
+                carousel.scrollLeft = scrollAmount;
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                scrollAmount -= cardWidth;
+                if (scrollAmount < 0) {
+                    scrollAmount = 0;
+                }
+                carousel.scrollLeft = scrollAmount;
+            });
+        });
+    </script>
+
+    <script id="range-slider-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const memberSizeSlider = document.getElementById('member-size');
+            const memberSizeValue = document.getElementById('member-size-value');
+            
+            memberSizeSlider.addEventListener('input', function() {
+                memberSizeValue.textContent = this.value;
+            });
+            
+            const memberSizeFilterSlider = document.getElementById('member-size-filter');
+            const memberSizeFilterValue = document.getElementById('member-size-filter-value');
+            
+            memberSizeFilterSlider.addEventListener('input', function() {
+                memberSizeFilterValue.textContent = this.value + '+';
+            });
+        });
+    </script>
+
+    <script id="back-to-top-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
