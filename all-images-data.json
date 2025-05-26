@@ -1,0 +1,325 @@
+{
+  "downloadDate": "2025-05-26T00:35:12.757Z",
+  "summary": {
+    "totalImages": 19,
+    "successfulDownloads": 15,
+    "failedDownloads": 4,
+    "byType": {
+      "communities": 6,
+      "news": 6,
+      "spotlights": 3,
+      "gallery": 4
+    }
+  },
+  "prompts": {
+    "community": [
+      {
+        "type": "community",
+        "id": 1,
+        "name": "Douala Developers",
+        "filename": "logo-1-douala-developers.jpg",
+        "prompt": "A modern, professional logo for a software development community in Cameroon, featuring abstract code symbols, clean lines, blue and green colors, minimalist design",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20software%20development%20community%20in%20Cameroon%2C%20featuring%20abstract%20code%20symbols%2C%20clean%20lines%2C%20blue%20and%20green%20colors%2C%20minimalist%20design&width=300&height=160&seq=com1&orientation=landscape",
+        "localPath": "/images/communities/logo-1-douala-developers.jpg"
+      },
+      {
+        "type": "community",
+        "id": 2,
+        "name": "Yaounde Tech Hub",
+        "filename": "logo-2-yaounde-tech-hub.jpg",
+        "prompt": "A modern, professional logo for a tech startup hub in Cameroon, featuring abstract geometric shapes, red and yellow colors, minimalist design with tech elements",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20tech%20startup%20hub%20in%20Cameroon%2C%20featuring%20abstract%20geometric%20shapes%2C%20red%20and%20yellow%20colors%2C%20minimalist%20design%20with%20tech%20elements&width=300&height=160&seq=com2&orientation=landscape",
+        "localPath": "/images/communities/logo-2-yaounde-tech-hub.jpg"
+      },
+      {
+        "type": "community",
+        "id": 3,
+        "name": "Cameroon AI Alliance",
+        "filename": "logo-3-cameroon-ai-alliance.jpg",
+        "prompt": "A modern, professional logo for an AI and data science community in Cameroon, featuring neural network patterns, purple and blue colors, minimalist tech design",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20an%20AI%20and%20data%20science%20community%20in%20Cameroon%2C%20featuring%20neural%20network%20patterns%2C%20purple%20and%20blue%20colors%2C%20minimalist%20tech%20design&width=300&height=160&seq=com3&orientation=landscape",
+        "localPath": "/images/communities/logo-3-cameroon-ai-alliance.jpg"
+      },
+      {
+        "type": "community",
+        "id": 4,
+        "name": "Women Techmakers Buea",
+        "filename": "logo-4-women-techmakers-buea.jpg",
+        "prompt": "A modern, professional logo for a women in tech community in Cameroon, featuring abstract feminine tech symbols, teal and purple colors, minimalist design",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20women%20in%20tech%20community%20in%20Cameroon%2C%20featuring%20abstract%20feminine%20tech%20symbols%2C%20teal%20and%20purple%20colors%2C%20minimalist%20design&width=300&height=160&seq=com4&orientation=landscape",
+        "localPath": "/images/communities/logo-4-women-techmakers-buea.jpg"
+      },
+      {
+        "type": "community",
+        "id": 5,
+        "name": "Cameroon Blockchain Network",
+        "filename": "logo-5-cameroon-blockchain-network.jpg",
+        "prompt": "A modern, professional logo for a blockchain technology community in Cameroon, featuring blockchain pattern elements, green and blue colors, minimalist tech design",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20blockchain%20technology%20community%20in%20Cameroon%2C%20featuring%20blockchain%20pattern%20elements%2C%20green%20and%20blue%20colors%2C%20minimalist%20tech%20design&width=300&height=160&seq=com5&orientation=landscape",
+        "localPath": "/images/communities/logo-5-cameroon-blockchain-network.jpg"
+      },
+      {
+        "type": "community",
+        "id": 6,
+        "name": "Cameroon UX Community",
+        "filename": "logo-6-cameroon-ux-community.jpg",
+        "prompt": "A modern, professional logo for a UX design community in Cameroon, featuring design tool symbols, orange and blue colors, minimalist creative design",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20modern%2C%20professional%20logo%20for%20a%20UX%20design%20community%20in%20Cameroon%2C%20featuring%20design%20tool%20symbols%2C%20orange%20and%20blue%20colors%2C%20minimalist%20creative%20design&width=300&height=160&seq=com6&orientation=landscape",
+        "localPath": "/images/communities/logo-6-cameroon-ux-community.jpg"
+      }
+    ],
+    "news": [
+      {
+        "type": "news",
+        "id": 1,
+        "name": "Douala Hackathon Winners Secure $50,000 Investment",
+        "filename": "news-1-douala-hackathon-winners-secure-50-000-investment.jpg",
+        "prompt": "A professional tech conference or hackathon scene in Cameroon, with diverse African developers presenting their work on stage. Modern event space with audience, professional lighting, subtle Cameroon flag colors in the background decorations.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20professional%20tech%20conference%20or%20hackathon%20scene%20in%20Cameroon%2C%20with%20diverse%20African%20developers%20presenting%20their%20work%20on%20stage.%20Modern%20event%20space%20with%20audience%2C%20professional%20lighting%2C%20subtle%20Cameroon%20flag%20colors%20in%20the%20background%20decorations.&width=400&height=250&seq=news1&orientation=landscape",
+        "localPath": "/images/news/news-1-douala-hackathon-winners-secure-50-000-investment.jpg",
+        "category": "Investment"
+      },
+      {
+        "type": "news",
+        "id": 2,
+        "name": "Women Techmakers Buea Launches Scholarship Program",
+        "filename": "news-2-women-techmakers-buea-launches-scholarship-program.jpg",
+        "prompt": "A professional scene of African women in tech at a workshop or training session in Cameroon. Women engaged with laptops and technology, collaborative learning environment. Modern tech space with subtle Cameroon flag colors in the decor.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20African%20women%20in%20tech%20at%20a%20workshop%20or%20training%20session%20in%20Cameroon.%20Women%20engaged%20with%20laptops%20and%20technology%2C%20collaborative%20learning%20environment.%20Modern%20tech%20space%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news2&orientation=landscape",
+        "localPath": "/images/news/news-2-women-techmakers-buea-launches-scholarship-program.jpg",
+        "category": "Education"
+      },
+      {
+        "type": "news",
+        "id": 3,
+        "name": "Yaounde Tech Hub Expands with New Innovation Center",
+        "filename": "news-3-yaounde-tech-hub-expands-with-new-innovation-center.jpg",
+        "prompt": "A professional scene of tech startup founders or entrepreneurs in Cameroon meeting with international investors. Diverse group of African business professionals in discussion in a modern office setting with subtle Cameroon flag colors in the decor.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20tech%20startup%20founders%20or%20entrepreneurs%20in%20Cameroon%20meeting%20with%20international%20investors.%20Diverse%20group%20of%20African%20business%20professionals%20in%20discussion%20in%20a%20modern%20office%20setting%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news3&orientation=landscape",
+        "localPath": "/images/news/news-3-yaounde-tech-hub-expands-with-new-innovation-center.jpg",
+        "category": "Infrastructure"
+      },
+      {
+        "type": "news",
+        "id": 4,
+        "name": "Cameroon AI Alliance Partners with Microsoft for Research Lab",
+        "filename": "news-4-cameroon-ai-alliance-partners-with-microsoft-for-research-lab.jpg",
+        "prompt": "A professional scene of tech professionals in Cameroon working with AI or data visualization technology. Diverse group of African tech experts analyzing data on screens in a modern office setting with subtle Cameroon flag colors in the decor.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20tech%20professionals%20in%20Cameroon%20working%20with%20AI%20or%20data%20visualization%20technology.%20Diverse%20group%20of%20African%20tech%20experts%20analyzing%20data%20on%20screens%20in%20a%20modern%20office%20setting%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news4&orientation=landscape",
+        "localPath": "/images/news/news-4-cameroon-ai-alliance-partners-with-microsoft-for-research-lab.jpg",
+        "category": "Partnership"
+      },
+      {
+        "type": "news",
+        "id": 5,
+        "name": "Cameroon Blockchain Network to Host Pan-African Conference",
+        "filename": "news-5-cameroon-blockchain-network-to-host-pan-african-conference.jpg",
+        "prompt": "A professional scene of blockchain or fintech professionals in Cameroon at a conference or workshop. Diverse group of African tech experts engaged in discussion in a modern setting with subtle Cameroon flag colors in the decor.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20blockchain%20or%20fintech%20professionals%20in%20Cameroon%20at%20a%20conference%20or%20workshop.%20Diverse%20group%20of%20African%20tech%20experts%20engaged%20in%20discussion%20in%20a%20modern%20setting%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news5&orientation=landscape",
+        "localPath": "/images/news/news-5-cameroon-blockchain-network-to-host-pan-african-conference.jpg",
+        "category": "Conference"
+      },
+      {
+        "type": "news",
+        "id": 6,
+        "name": "Cameroon UX Community Members Win African Design Awards",
+        "filename": "news-6-cameroon-ux-community-members-win-african-design-awards.jpg",
+        "prompt": "A professional scene of UX designers or creative tech professionals in Cameroon collaborating on a project. Diverse group of African designers working with design tools and prototypes in a modern creative space with subtle Cameroon flag colors in the decor.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20UX%20designers%20or%20creative%20tech%20professionals%20in%20Cameroon%20collaborating%20on%20a%20project.%20Diverse%20group%20of%20African%20designers%20working%20with%20design%20tools%20and%20prototypes%20in%20a%20modern%20creative%20space%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news6&orientation=landscape",
+        "localPath": "/images/news/news-6-cameroon-ux-community-members-win-african-design-awards.jpg",
+        "category": "Awards"
+      }
+    ],
+    "spotlight": [
+      {
+        "type": "spotlight",
+        "id": 1,
+        "name": "Douala Developers",
+        "filename": "spotlight-1-douala-developers.jpg",
+        "prompt": "A diverse group of young African software developers collaborating in a modern tech workspace in Douala, Cameroon. They are gathered around computers, engaged in coding and discussion. The space has a professional yet creative atmosphere with subtle green and red Cameroon colors in the decor. Natural lighting, modern office setting.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20diverse%20group%20of%20young%20African%20software%20developers%20collaborating%20in%20a%20modern%20tech%20workspace%20in%20Douala%2C%20Cameroon.%20They%20are%20gathered%20around%20computers%2C%20engaged%20in%20coding%20and%20discussion.%20The%20space%20has%20a%20professional%20yet%20creative%20atmosphere%20with%20subtle%20green%20and%20red%20Cameroon%20colors%20in%20the%20decor.%20Natural%20lighting%2C%20modern%20office%20setting.&width=600&height=400&seq=spot1&orientation=landscape",
+        "localPath": "/images/spotlights/spotlight-1-douala-developers.jpg"
+      },
+      {
+        "type": "spotlight",
+        "id": 2,
+        "name": "Women Techmakers Buea",
+        "filename": "spotlight-2-women-techmakers-buea.jpg",
+        "prompt": "A professional scene of women tech professionals in Buea, Cameroon, engaged in a coding workshop. The diverse group of African women are working on laptops, some teaching others. The space is bright and modern with subtle tech elements and hints of Cameroon national colors in the background. Professional atmosphere, collaborative environment.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20women%20tech%20professionals%20in%20Buea%2C%20Cameroon%2C%20engaged%20in%20a%20coding%20workshop.%20The%20diverse%20group%20of%20African%20women%20are%20working%20on%20laptops%2C%20some%20teaching%20others.%20The%20space%20is%20bright%20and%20modern%20with%20subtle%20tech%20elements%20and%20hints%20of%20Cameroon%20national%20colors%20in%20the%20background.%20Professional%20atmosphere%2C%20collaborative%20environment.&width=600&height=400&seq=spot2&orientation=landscape",
+        "localPath": "/images/spotlights/spotlight-2-women-techmakers-buea.jpg"
+      },
+      {
+        "type": "spotlight",
+        "id": 3,
+        "name": "Cameroon AI Alliance",
+        "filename": "spotlight-3-cameroon-ai-alliance.jpg",
+        "prompt": "A professional gathering of AI researchers and engineers in Cameroon, diverse group of African tech professionals analyzing data visualizations on large screens. Modern tech conference room with subtle Cameroon flag colors in the decor. Professional atmosphere, collaborative environment, clean lighting.",
+        "originalUrl": "https://readdy.ai/api/search-image?query=A%20professional%20gathering%20of%20AI%20researchers%20and%20engineers%20in%20Cameroon%2C%20diverse%20group%20of%20African%20tech%20professionals%20analyzing%20data%20visualizations%20on%20large%20screens.%20Modern%20tech%20conference%20room%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.%20Professional%20atmosphere%2C%20collaborative%20environment%2C%20clean%20lighting.&width=600&height=400&seq=spot3&orientation=landscape",
+        "localPath": "/images/spotlights/spotlight-3-cameroon-ai-alliance.jpg"
+      }
+    ],
+    "gallery": [
+      {
+        "type": "gallery",
+        "id": 1,
+        "name": "Monthly Developer Meetup",
+        "filename": "gallery-1-monthly-developer-meetup.jpg",
+        "prompt": "African tech community meetup in Cameroon, diverse group of developers networking and collaborating, modern tech space, professional atmosphere",
+        "originalUrl": "https://readdy.ai/api/search-image?query=African%20tech%20community%20meetup%20in%20Cameroon%2C%20diverse%20group%20of%20developers%20networking%20and%20collaborating%2C%20modern%20tech%20space%2C%20professional%20atmosphere&width=400&height=300&seq=gallery1&orientation=landscape",
+        "localPath": "/images/gallery/gallery-1-monthly-developer-meetup.jpg",
+        "alt": "Community Meetup"
+      },
+      {
+        "type": "gallery",
+        "id": 2,
+        "name": "Hands-on Workshop",
+        "filename": "gallery-2-hands-on-workshop.jpg",
+        "prompt": "Tech workshop in Cameroon, African developers learning and coding together, laptops and screens, collaborative environment",
+        "originalUrl": "https://readdy.ai/api/search-image?query=Tech%20workshop%20in%20Cameroon%2C%20African%20developers%20learning%20and%20coding%20together%2C%20laptops%20and%20screens%2C%20collaborative%20environment&width=400&height=300&seq=gallery2&orientation=landscape",
+        "localPath": "/images/gallery/gallery-2-hands-on-workshop.jpg",
+        "alt": "Workshop Session"
+      },
+      {
+        "type": "gallery",
+        "id": 3,
+        "name": "Annual Hackathon",
+        "filename": "gallery-3-annual-hackathon.jpg",
+        "prompt": "Hackathon event in Cameroon, teams of African developers working intensively on projects, modern tech venue, competitive atmosphere",
+        "originalUrl": "https://readdy.ai/api/search-image?query=Hackathon%20event%20in%20Cameroon%2C%20teams%20of%20African%20developers%20working%20intensively%20on%20projects%2C%20modern%20tech%20venue%2C%20competitive%20atmosphere&width=400&height=300&seq=gallery3&orientation=landscape",
+        "localPath": "/images/gallery/gallery-3-annual-hackathon.jpg",
+        "alt": "Hackathon Event"
+      },
+      {
+        "type": "gallery",
+        "id": 4,
+        "name": "Tech Conference",
+        "filename": "gallery-4-tech-conference.jpg",
+        "prompt": "Tech conference presentation in Cameroon, African speaker presenting to an engaged tech audience, professional stage setup",
+        "originalUrl": "https://readdy.ai/api/search-image?query=Tech%20conference%20presentation%20in%20Cameroon%2C%20African%20speaker%20presenting%20to%20an%20engaged%20tech%20audience%2C%20professional%20stage%20setup&width=400&height=300&seq=gallery4&orientation=landscape",
+        "localPath": "/images/gallery/gallery-4-tech-conference.jpg",
+        "alt": "Conference Presentation"
+      }
+    ]
+  },
+  "results": [
+    {
+      "id": "community-1",
+      "type": "Community Logo",
+      "name": "Douala Developers",
+      "status": "success"
+    },
+    {
+      "id": "community-2",
+      "type": "Community Logo",
+      "name": "Yaounde Tech Hub",
+      "status": "success"
+    },
+    {
+      "id": "community-3",
+      "type": "Community Logo",
+      "name": "Cameroon AI Alliance",
+      "status": "success"
+    },
+    {
+      "id": "community-4",
+      "type": "Community Logo",
+      "name": "Women Techmakers Buea",
+      "status": "success"
+    },
+    {
+      "id": "community-5",
+      "type": "Community Logo",
+      "name": "Cameroon Blockchain Network",
+      "status": "success"
+    },
+    {
+      "id": "community-6",
+      "type": "Community Logo",
+      "name": "Cameroon UX Community",
+      "status": "success"
+    },
+    {
+      "id": "news-1",
+      "type": "News Article",
+      "name": "Douala Hackathon Winners Secure $50,000 Investment",
+      "status": "success"
+    },
+    {
+      "id": "news-2",
+      "type": "News Article",
+      "name": "Women Techmakers Buea Launches Scholarship Program",
+      "status": "success"
+    },
+    {
+      "id": "news-3",
+      "type": "News Article",
+      "name": "Yaounde Tech Hub Expands with New Innovation Center",
+      "status": "success"
+    },
+    {
+      "id": "news-4",
+      "type": "News Article",
+      "name": "Cameroon AI Alliance Partners with Microsoft for Research Lab",
+      "status": "success"
+    },
+    {
+      "id": "news-5",
+      "type": "News Article",
+      "name": "Cameroon Blockchain Network to Host Pan-African Conference",
+      "status": "success"
+    },
+    {
+      "id": "news-6",
+      "type": "News Article",
+      "name": "Cameroon UX Community Members Win African Design Awards",
+      "status": "success"
+    },
+    {
+      "id": "spotlight-1",
+      "type": "Community Spotlight",
+      "name": "Douala Developers",
+      "status": "success"
+    },
+    {
+      "id": "spotlight-2",
+      "type": "Community Spotlight",
+      "name": "Women Techmakers Buea",
+      "status": "success"
+    },
+    {
+      "id": "spotlight-3",
+      "type": "Community Spotlight",
+      "name": "Cameroon AI Alliance",
+      "status": "success"
+    },
+    {
+      "id": "gallery-1",
+      "type": "Gallery Image",
+      "name": "Monthly Developer Meetup",
+      "status": "failed",
+      "error": "HTTP 400: Bad Request"
+    },
+    {
+      "id": "gallery-2",
+      "type": "Gallery Image",
+      "name": "Hands-on Workshop",
+      "status": "failed",
+      "error": "HTTP 400: Bad Request"
+    },
+    {
+      "id": "gallery-3",
+      "type": "Gallery Image",
+      "name": "Annual Hackathon",
+      "status": "failed",
+      "error": "HTTP 400: Bad Request"
+    },
+    {
+      "id": "gallery-4",
+      "type": "Gallery Image",
+      "name": "Tech Conference",
+      "status": "failed",
+      "error": "HTTP 400: Bad Request"
+    }
+  ]
+}
