@@ -12,7 +12,7 @@ const Hero = () => {
     <section 
       className="relative overflow-hidden" 
       style={{
-        backgroundImage: "url('https://readdy.ai/api/search-image?query=A%20beautiful%20panoramic%20view%20of%20Cameroon%20landscape%20with%20tech%20elements%2C%20modern%20city%20skyline%20in%20the%20distance%2C%20geometric%20patterns%20in%20green%2C%20red%2C%20and%20yellow%20colors%20representing%20Cameroon%20flag%2C%20subtle%20tech-related%20symbols%2C%20clean%20modern%20design%2C%20soft%20lighting&width=1920&height=1080&seq=hero1&orientation=landscape')",
+        backgroundImage: "url('cmr-tech-banner.jpg')",
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
