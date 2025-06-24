@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { useApi } from '../../hooks/useApi';
-import { fetchFeaturedCommunities } from '../../services/api';
+import { useFeaturedCommunities } from '../../hooks/useApiV2';
 import CommunityCard from '../ui/CommunityCard';
 import LoadingSpinner from '../common/LoadingSpinner';
 
