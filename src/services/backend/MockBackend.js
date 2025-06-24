@@ -207,9 +207,12 @@ export class MockBackend extends BaseBackend {
   ) {
     await delay(800);
 
-    let communities = [...this.mockData.communities];
-
-    // Apply filters
+    let communities = [...this.mockData.communities]; // Apply filters
+    if (filters.exclude && filters.exclude.length > 0) {
+      communities = communities.filter(
+        (c) => !filters.exclude.includes(c.id.toString())
+      );
+    }
     if (filters.region && filters.region !== "All Regions") {
       communities = communities.filter((c) => c.region === filters.region);
     }
