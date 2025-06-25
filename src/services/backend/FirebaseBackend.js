@@ -38,785 +38,448 @@ export class FirebaseBackend extends BaseBackend {
       this.db = getFirestore(this.firebaseApp);
       this.auth = getAuth(this.firebaseApp);
 
-      this.isInitialized = true;
-      return createApiResponse({
-        message: "Firebase backend initialized successfully",
-        config: {
-          projectId: firebaseConfig.projectId,
-          authDomain: firebaseConfig.authDomain,
-        },
-      });
+      console.log("🔥 Firebase initialized successfully");
     } catch (error) {
-      return createApiError(
-        `Failed to initialize Firebase: ${error.message}`,
-        "INIT_ERROR"
-      );
+      console.error("❌ Firebase initialization failed:", error);
+      throw createApiError(`Firebase initialization failed: ${error.message}`);
     }
   }
+
   // Helper method to apply filters to Firestore queries
-  async _applyFilters(query, filters = {}) {
-    const { where } = await import("firebase/firestore");
+  _applyFirestoreFilters(queryRef, filters = {}) {
+    let currentQuery = queryRef;
 
-    let firestoreQuery = query;
+    try {
+      // Import Firestore functions synchronously since they're already loaded
+      const { where, orderBy, limit: firestoreLimit } = require("firebase/firestore");
 
-    // Apply where filters
-    if (filters.region) {
-      firestoreQuery = where(firestoreQuery, "region", "==", filters.region);
-    }
-    if (filters.category) {
-      firestoreQuery = where(
-        firestoreQuery,
-        "category",
-        "==",
-        filters.category
-      );
-    }
-    if (filters.featured !== undefined) {
-      firestoreQuery = where(
-        firestoreQuery,
-        "featured",
-        "==",
-        filters.featured
-      );
-    }
-    if (filters.tags && filters.tags.length > 0) {
-      firestoreQuery = where(
-        firestoreQuery,
-        "tags",
-        "array-contains-any",
-        filters.tags
-      );
-    }
-    if (filters.minMembers) {
-      firestoreQuery = where(
-        firestoreQuery,
-        "members",
-        ">=",
-        filters.minMembers
-      );
-    }
-    if (filters.maxMembers) {
-      firestoreQuery = where(
-        firestoreQuery,
-        "members",
-        "<=",
-        filters.maxMembers
-      );
-    }
-    if (filters.status) {
-      firestoreQuery = where(firestoreQuery, "status", "==", filters.status);
-    }
-    if (filters.upcoming === true) {
-      const today = new Date().toISOString().split("T")[0];
-      firestoreQuery = where(firestoreQuery, "date", ">=", today);
-    }
+      // Apply where filters
+      if (filters.region && filters.region !== "All Regions") {
+        currentQuery = where(currentQuery, "region", "==", filters.region);
+      }
 
-    return firestoreQuery;
+      if (filters.category && filters.category !== "All Categories") {
+        currentQuery = where(currentQuery, "category", "==", filters.category);
+      }
+
+      if (filters.featured !== undefined) {
+        currentQuery = where(currentQuery, "featured", "==", filters.featured);
+      }
+
+      if (filters.status) {
+        currentQuery = where(currentQuery, "status", "==", filters.status);
+      }
+
+      if (filters.upcoming === true) {
+        const now = new Date().toISOString().split('T')[0];
+        currentQuery = where(currentQuery, "date", ">=", now);
+      }
+
+      if (filters.minMembers) {
+        currentQuery = where(currentQuery, "members", ">=", filters.minMembers);
+      }
+
+      if (filters.maxMembers) {
+        currentQuery = where(currentQuery, "members", "<=", filters.maxMembers);
+      }
+
+      // Apply exclude filter (for similar communities)
+      if (filters.exclude && filters.exclude.length > 0) {
+        // Note: Firestore doesn't support "not in" with arrays, so we'll handle this differently
+        // We'll fetch all and filter in memory for now
+      }
+
+      // Apply sorting
+      if (filters.sortBy) {
+        const direction = filters.sortOrder === "desc" ? "desc" : "asc";
+        currentQuery = orderBy(currentQuery, filters.sortBy, direction);
+      }
+
+      // Apply limit
+      if (filters.limit) {
+        currentQuery = firestoreLimit(currentQuery, filters.limit);
+      }
+
+      return currentQuery;
+    } catch (error) {
+      console.error("Error applying Firestore filters:", error);
+      return queryRef; // Return original query if filtering fails
+    }
   }
 
-  // Helper method to apply sorting to Firestore queries
-  async _applySorting(query, sort = {}) {
-    const { orderBy } = await import("firebase/firestore");
-
-    if (sort.field) {
-      const direction = sort.direction === "desc" ? "desc" : "asc";
-      return orderBy(query, sort.field, direction);
-    }
-
-    return query;
-  }
-
-  // Helper method to apply pagination to Firestore queries
-  async _applyPagination(query, pagination = {}) {
-    const { limit, startAfter } = await import("firebase/firestore");
-
-    if (pagination.limit) {
-      query = limit(query, pagination.limit);
-    }
-
-    if (pagination.startAfter) {
-      query = startAfter(query, pagination.startAfter);
-    }
-
-    return query;
-  }
   async getCommunities(filters = {}, pagination = {}, sort = {}) {
     try {
-      if (!this.isInitialized) {
+      if (!this.db) {
         await this.initialize();
       }
 
-      const { collection, query, getDocs, orderBy, where, limit } =
-        await import("firebase/firestore");
-
-      let firestoreQuery = collection(this.db, COLLECTION_NAMES.COMMUNITIES);
-
-      // Apply filters
-      firestoreQuery = await this._applyFilters(firestoreQuery, filters);
-
-      // Apply sorting (default: by members desc)
-      if (!sort.field) {
-        sort = { field: "members", direction: "desc" };
+      const { collection, getDocs, query } = await import("firebase/firestore");
+      
+      // Start with basic collection reference
+      const communitiesRef = collection(this.db, COLLECTION_NAMES.COMMUNITIES);
+      
+      // Create query with filters
+      let communitiesQuery = communitiesRef;
+      
+      // Apply filters manually to avoid the _internalPath issue
+      if (filters.region && filters.region !== "All Regions") {
+        const { where } = await import("firebase/firestore");
+        communitiesQuery = query(communitiesQuery, where("region", "==", filters.region));
       }
-      firestoreQuery = await this._applySorting(firestoreQuery, sort);
 
-      // Apply pagination
-      firestoreQuery = await this._applyPagination(firestoreQuery, pagination);
+      if (filters.category && filters.category !== "All Categories") {
+        const { where } = await import("firebase/firestore");
+        communitiesQuery = query(communitiesQuery, where("category", "==", filters.category));
+      }
 
-      const querySnapshot = await getDocs(firestoreQuery);
-      const communities = [];
+      if (filters.featured !== undefined) {
+        const { where } = await import("firebase/firestore");
+        communitiesQuery = query(communitiesQuery, where("featured", "==", filters.featured));
+      }
+
+      if (filters.status) {
+        const { where } = await import("firebase/firestore");
+        communitiesQuery = query(communitiesQuery, where("status", "==", filters.status));
+      }
+
+      // Apply sorting
+      if (sort.field) {
+        const { orderBy } = await import("firebase/firestore");
+        const direction = sort.direction === "desc" ? "desc" : "asc";
+        communitiesQuery = query(communitiesQuery, orderBy(sort.field, direction));
+      }
+
+      // Apply limit
+      if (pagination.limit) {
+        const { limit } = await import("firebase/firestore");
+        communitiesQuery = query(communitiesQuery, limit(pagination.limit));
+      }
+
+      // Execute query
+      const querySnapshot = await getDocs(communitiesQuery);
+      
+      let communityList = [];
       querySnapshot.forEach((doc) => {
-        communities.push({ id: doc.id, ...doc.data() });
+        communityList.push({
+          id: doc.id,
+          ...doc.data()
+        });
       });
 
-      // Handle exclude filter (for similar communities)
-      let filteredCommunities = communities;
-      if (filters.exclude && Array.isArray(filters.exclude)) {
-        filteredCommunities = communities.filter(
-          (community) => !filters.exclude.includes(community.id)
+      // Apply exclude filter in memory (since Firestore doesn't support NOT IN efficiently)
+      if (filters.exclude && filters.exclude.length > 0) {
+        communityList = communityList.filter(community => 
+          !filters.exclude.includes(community.id)
         );
       }
 
+      console.log(`🏘️ Fetched ${communityList.length} communities from Firebase`);
+      
       return createApiResponse({
-        communities: filteredCommunities,
-        total: filteredCommunities.length,
-        pagination: {
-          page: pagination.page || 1,
-          limit: pagination.limit || 10,
-          hasNext: querySnapshot.docs.length === (pagination.limit || 10),
-        },
+        communities: communityList,
+        total: communityList.length,
+        page: pagination.page || 1,
+        limit: pagination.limit || communityList.length
       });
+
     } catch (error) {
-      return createApiError(
-        `Failed to fetch communities: ${error.message}`,
-        "FETCH_ERROR"
-      );
+      console.error("❌ Error fetching communities from Firebase:", error);
+      throw createApiError(`Failed to fetch communities: ${error.message}`);
     }
   }
 
   async getFeaturedCommunities(limit = 6) {
     try {
+      console.log(`🌟 Fetching ${limit} featured communities from Firebase...`);
+      
       const result = await this.getCommunities(
-        { featured: true },
+        { featured: true, status: "active" },
         { limit },
         { field: "members", direction: "desc" }
       );
-
-      if (!result.success) {
-        return result;
-      }
-
-      return createApiResponse({
-        communities: result.data.communities,
-        total: result.data.total,
-      });
+      
+      return createApiResponse(result.data.communities);
     } catch (error) {
-      return createApiError(
-        `Failed to fetch featured communities: ${error.message}`,
-        "FETCH_ERROR"
-      );
+      console.error("❌ Error fetching featured communities:", error);
+      throw createApiError(`Failed to fetch featured communities: ${error.message}`);
     }
   }
 
   async getCommunityById(id) {
     try {
-      if (!this.isInitialized) {
+      if (!this.db) {
         await this.initialize();
       }
 
       const { doc, getDoc } = await import("firebase/firestore");
-      const docRef = doc(this.db, COLLECTION_NAMES.COMMUNITIES, id.toString());
-      const docSnap = await getDoc(docRef);
+      
+      const communityRef = doc(this.db, COLLECTION_NAMES.COMMUNITIES, id);
+      const communityDoc = await getDoc(communityRef);
 
-      if (docSnap.exists()) {
-        return createApiResponse({
-          community: { id: docSnap.id, ...docSnap.data() },
-        });
-      } else {
-        return createApiError(`Community with id ${id} not found`, "NOT_FOUND");
+      if (!communityDoc.exists()) {
+        throw createApiError(`Community with ID ${id} not found`);
       }
+
+      const community = {
+        id: communityDoc.id,
+        ...communityDoc.data()
+      };
+
+      console.log(`🏘️ Fetched community: ${community.name}`);
+      return createApiResponse(community);
+
     } catch (error) {
-      return createApiError(
-        `Failed to fetch community: ${error.message}`,
-        "FETCH_ERROR"
-      );
+      console.error("❌ Error fetching community by ID:", error);
+      throw createApiError(`Failed to fetch community: ${error.message}`);
     }
   }
 
-  async createCommunity(communityData) {
+  async getEvents(filters = {}, pagination = {}, sort = {}) {
     try {
-      if (!this.isInitialized) {
+      if (!this.db) {
         await this.initialize();
       }
 
-      const { collection, addDoc, Timestamp } = await import(
-        "firebase/firestore"
-      );
+      const { collection, getDocs, query, where, orderBy, limit } = await import("firebase/firestore");
+      
+      let eventsQuery = collection(this.db, COLLECTION_NAMES.EVENTS);
 
-      const newCommunity = {
-        ...communityData,
-        created_at: Timestamp.now(),
-        updated_at: Timestamp.now(),
-        members: communityData.members || 0,
-        featured: communityData.featured || false,
-      };
+      // Apply filters
+      if (filters.upcoming === true) {
+        const now = new Date().toISOString().split('T')[0];
+        eventsQuery = query(eventsQuery, where("date", ">=", now));
+      }
 
-      const docRef = await addDoc(
-        collection(this.db, COLLECTION_NAMES.COMMUNITIES),
-        newCommunity
-      );
+      if (filters.type) {
+        eventsQuery = query(eventsQuery, where("type", "==", filters.type));
+      }
 
-      return createApiResponse({
-        community: { id: docRef.id, ...newCommunity },
-        message: "Community created successfully",
+      if (filters.status) {
+        eventsQuery = query(eventsQuery, where("status", "==", filters.status));
+      }
+
+      // Apply sorting (default to date ascending for events)
+      const sortField = sort.field || "date";
+      const sortDirection = sort.direction || "asc";
+      eventsQuery = query(eventsQuery, orderBy(sortField, sortDirection));
+
+      // Apply limit
+      if (pagination.limit) {
+        eventsQuery = query(eventsQuery, limit(pagination.limit));
+      }
+
+      const querySnapshot = await getDocs(eventsQuery);
+      
+      const eventsList = [];
+      querySnapshot.forEach((doc) => {
+        eventsList.push({
+          id: doc.id,
+          ...doc.data()
+        });
       });
+
+      console.log(`📅 Fetched ${eventsList.length} events from Firebase`);
+      
+      return createApiResponse({
+        events: eventsList,
+        total: eventsList.length,
+        page: pagination.page || 1,
+        limit: pagination.limit || eventsList.length
+      });
+
     } catch (error) {
-      return createApiError(
-        `Failed to create community: ${error.message}`,
-        "CREATE_ERROR"
-      );
+      console.error("❌ Error fetching events from Firebase:", error);
+      throw createApiError(`Failed to fetch events: ${error.message}`);
     }
+  }
+
+  async getNews(filters = {}, pagination = {}, sort = {}) {
+    try {
+      if (!this.db) {
+        await this.initialize();
+      }
+
+      const { collection, getDocs, query, where, orderBy, limit } = await import("firebase/firestore");
+      
+      let newsQuery = collection(this.db, COLLECTION_NAMES.NEWS);
+
+      // Apply filters
+      if (filters.category) {
+        newsQuery = query(newsQuery, where("category", "==", filters.category));
+      }
+
+      if (filters.author) {
+        newsQuery = query(newsQuery, where("author", "==", filters.author));
+      }
+
+      // Apply sorting (default to date descending for news)
+      const sortField = sort.field || "date";
+      const sortDirection = sort.direction || "desc";
+      newsQuery = query(newsQuery, orderBy(sortField, sortDirection));
+
+      // Apply limit
+      if (pagination.limit) {
+        newsQuery = query(newsQuery, limit(pagination.limit));
+      }
+
+      const querySnapshot = await getDocs(newsQuery);
+      
+      const newsList = [];
+      querySnapshot.forEach((doc) => {
+        newsList.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+
+      console.log(`📰 Fetched ${newsList.length} news articles from Firebase`);
+      
+      return createApiResponse({
+        news: newsList,
+        total: newsList.length,
+        page: pagination.page || 1,
+        limit: pagination.limit || newsList.length
+      });
+
+    } catch (error) {
+      console.error("❌ Error fetching news from Firebase:", error);
+      throw createApiError(`Failed to fetch news: ${error.message}`);
+    }
+  }
+
+  // Placeholder methods for future implementation
+  async createCommunity(communityData) {
+    throw createApiError("Community creation not implemented yet");
   }
 
   async updateCommunity(id, updates) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { doc, updateDoc, Timestamp } = await import("firebase/firestore");
-      const docRef = doc(this.db, COLLECTION_NAMES.COMMUNITIES, id.toString());
-
-      const updateData = {
-        ...updates,
-        updated_at: Timestamp.now(),
-      };
-
-      await updateDoc(docRef, updateData);
-
-      return createApiResponse({
-        message: "Community updated successfully",
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to update community: ${error.message}`,
-        "UPDATE_ERROR"
-      );
-    }
+    throw createApiError("Community update not implemented yet");
   }
 
   async deleteCommunity(id) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { doc, deleteDoc } = await import("firebase/firestore");
-      const docRef = doc(this.db, COLLECTION_NAMES.COMMUNITIES, id.toString());
-
-      await deleteDoc(docRef);
-
-      return createApiResponse({
-        message: "Community deleted successfully",
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to delete community: ${error.message}`,
-        "DELETE_ERROR"
-      );
-    }
-  }
-  async getEvents(filters = {}, pagination = {}, sort = {}) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { collection, getDocs } = await import("firebase/firestore");
-
-      let firestoreQuery = collection(this.db, COLLECTION_NAMES.EVENTS);
-
-      // Apply filters
-      firestoreQuery = await this._applyFilters(firestoreQuery, filters);
-
-      // Apply sorting (default: by date asc for upcoming events)
-      if (!sort.field) {
-        sort = { field: "date", direction: "asc" };
-      }
-      firestoreQuery = await this._applySorting(firestoreQuery, sort);
-
-      // Apply pagination
-      firestoreQuery = await this._applyPagination(firestoreQuery, pagination);
-
-      const querySnapshot = await getDocs(firestoreQuery);
-      const events = [];
-      querySnapshot.forEach((doc) => {
-        events.push({ id: doc.id, ...doc.data() });
-      });
-
-      return createApiResponse({
-        events,
-        total: events.length,
-        pagination: {
-          page: pagination.page || 1,
-          limit: pagination.limit || 10,
-          hasNext: querySnapshot.docs.length === (pagination.limit || 10),
-        },
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to fetch events: ${error.message}`,
-        "FETCH_ERROR"
-      );
-    }
+    throw createApiError("Community deletion not implemented yet");
   }
 
   async getUpcomingEvents(limit = 10) {
-    try {
-      const today = new Date().toISOString().split("T")[0];
-      const result = await this.getEvents(
-        { upcoming: true },
-        { limit },
-        { field: "date", direction: "asc" }
-      );
-
-      if (!result.success) {
-        return result;
-      }
-
-      return createApiResponse({
-        events: result.data.events,
-        total: result.data.total,
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to fetch upcoming events: ${error.message}`,
-        "FETCH_ERROR"
-      );
-    }
+    return this.getEvents(
+      { upcoming: true, status: "upcoming" },
+      { limit },
+      { field: "date", direction: "asc" }
+    );
   }
 
   async getEventById(id) {
     try {
-      if (!this.isInitialized) {
+      if (!this.db) {
         await this.initialize();
       }
 
       const { doc, getDoc } = await import("firebase/firestore");
-      const docRef = doc(this.db, COLLECTION_NAMES.EVENTS, id.toString());
-      const docSnap = await getDoc(docRef);
+      
+      const eventRef = doc(this.db, COLLECTION_NAMES.EVENTS, id);
+      const eventDoc = await getDoc(eventRef);
 
-      if (docSnap.exists()) {
-        return createApiResponse({
-          event: { id: docSnap.id, ...docSnap.data() },
-        });
-      } else {
-        return createApiError(`Event with id ${id} not found`, "NOT_FOUND");
+      if (!eventDoc.exists()) {
+        throw createApiError(`Event with ID ${id} not found`);
       }
-    } catch (error) {
-      return createApiError(
-        `Failed to fetch event: ${error.message}`,
-        "FETCH_ERROR"
-      );
-    }
-  }
-
-  async createEvent(eventData) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { collection, addDoc, Timestamp } = await import(
-        "firebase/firestore"
-      );
-
-      const newEvent = {
-        ...eventData,
-        created_at: Timestamp.now(),
-        status: eventData.status || "upcoming",
-      };
-
-      const docRef = await addDoc(
-        collection(this.db, COLLECTION_NAMES.EVENTS),
-        newEvent
-      );
 
       return createApiResponse({
-        event: { id: docRef.id, ...newEvent },
-        message: "Event created successfully",
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to create event: ${error.message}`,
-        "CREATE_ERROR"
-      );
-    }
-  }
-
-  async registerForEvent(eventId, userData) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { collection, addDoc, Timestamp } = await import(
-        "firebase/firestore"
-      );
-
-      const registration = {
-        eventId,
-        ...userData,
-        registered_at: Timestamp.now(),
-        status: "confirmed",
-      };
-
-      const docRef = await addDoc(
-        collection(this.db, "event_registrations"),
-        registration
-      );
-
-      return createApiResponse({
-        registration: { id: docRef.id, ...registration },
-        message: "Successfully registered for event",
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to register for event: ${error.message}`,
-        "REGISTRATION_ERROR"
-      );
-    }
-  }
-  async getNews(filters = {}, pagination = {}, sort = {}) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { collection, getDocs } = await import("firebase/firestore");
-
-      let firestoreQuery = collection(this.db, COLLECTION_NAMES.NEWS);
-
-      // Apply filters
-      firestoreQuery = await this._applyFilters(firestoreQuery, filters);
-
-      // Apply sorting (default: by date desc)
-      if (!sort.field) {
-        sort = { field: "created_at", direction: "desc" };
-      }
-      firestoreQuery = await this._applySorting(firestoreQuery, sort);
-
-      // Apply pagination
-      firestoreQuery = await this._applyPagination(firestoreQuery, pagination);
-
-      const querySnapshot = await getDocs(firestoreQuery);
-      const news = [];
-      querySnapshot.forEach((doc) => {
-        news.push({ id: doc.id, ...doc.data() });
+        id: eventDoc.id,
+        ...eventDoc.data()
       });
 
-      return createApiResponse({
-        news,
-        total: news.length,
-        pagination: {
-          page: pagination.page || 1,
-          limit: pagination.limit || 10,
-          hasNext: querySnapshot.docs.length === (pagination.limit || 10),
-        },
-      });
     } catch (error) {
-      return createApiError(
-        `Failed to fetch news: ${error.message}`,
-        "FETCH_ERROR"
-      );
-    }
-  }
-
-  async getNewsById(id) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { doc, getDoc } = await import("firebase/firestore");
-      const docRef = doc(this.db, COLLECTION_NAMES.NEWS, id.toString());
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        return createApiResponse({
-          article: { id: docSnap.id, ...docSnap.data() },
-        });
-      } else {
-        return createApiError(
-          `News article with id ${id} not found`,
-          "NOT_FOUND"
-        );
-      }
-    } catch (error) {
-      return createApiError(
-        `Failed to fetch news article: ${error.message}`,
-        "FETCH_ERROR"
-      );
-    }
-  }
-
-  async createNews(newsData) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { collection, addDoc, Timestamp } = await import(
-        "firebase/firestore"
-      );
-
-      const newArticle = {
-        ...newsData,
-        created_at: Timestamp.now(),
-        date: newsData.date || new Date().toISOString().split("T")[0],
-      };
-
-      const docRef = await addDoc(
-        collection(this.db, COLLECTION_NAMES.NEWS),
-        newArticle
-      );
-
-      return createApiResponse({
-        article: { id: docRef.id, ...newArticle },
-        message: "News article created successfully",
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to create news article: ${error.message}`,
-        "CREATE_ERROR"
-      );
+      console.error("❌ Error fetching event by ID:", error);
+      throw createApiError(`Failed to fetch event: ${error.message}`);
     }
   }
 
   async submitContact(contactData) {
     try {
-      if (!this.isInitialized) {
+      if (!this.db) {
         await this.initialize();
       }
 
-      const { collection, addDoc, Timestamp } = await import(
-        "firebase/firestore"
-      );
-
-      const contactSubmission = {
+      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+      
+      const contactRef = collection(this.db, "contacts");
+      const docRef = await addDoc(contactRef, {
         ...contactData,
-        submitted_at: Timestamp.now(),
-        status: "new",
-      };
-
-      const docRef = await addDoc(
-        collection(this.db, "contact_submissions"),
-        contactSubmission
-      );
-
-      return createApiResponse({
-        submission: { id: docRef.id, ...contactSubmission },
-        message: "Contact form submitted successfully",
+        created_at: serverTimestamp(),
+        status: "new"
       });
+
+      console.log("📧 Contact form submitted to Firebase");
+      return createApiResponse({ id: docRef.id, message: "Contact form submitted successfully" });
+
     } catch (error) {
-      return createApiError(
-        `Failed to submit contact form: ${error.message}`,
-        "SUBMIT_ERROR"
-      );
+      console.error("❌ Error submitting contact form:", error);
+      throw createApiError(`Failed to submit contact form: ${error.message}`);
     }
   }
 
   async subscribeNewsletter(email, preferences = {}) {
     try {
-      if (!this.isInitialized) {
+      if (!this.db) {
         await this.initialize();
       }
 
-      const { collection, addDoc, Timestamp } = await import(
-        "firebase/firestore"
-      );
-
-      const subscription = {
+      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+      
+      const subscribersRef = collection(this.db, "newsletter_subscribers");
+      const docRef = await addDoc(subscribersRef, {
         email,
         preferences,
-        subscribed_at: Timestamp.now(),
-        status: "active",
-      };
-
-      const docRef = await addDoc(
-        collection(this.db, "newsletter_subscriptions"),
-        subscription
-      );
-
-      return createApiResponse({
-        subscription: { id: docRef.id, ...subscription },
-        message: "Successfully subscribed to newsletter",
+        subscribed_at: serverTimestamp(),
+        status: "active"
       });
+
+      console.log("📧 Newsletter subscription added to Firebase");
+      return createApiResponse({ id: docRef.id, message: "Successfully subscribed to newsletter" });
+
     } catch (error) {
-      return createApiError(
-        `Failed to subscribe to newsletter: ${error.message}`,
-        "SUBSCRIPTION_ERROR"
-      );
-    }
-  }
-
-  async unsubscribeNewsletter(email) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const { collection, query, where, getDocs, updateDoc, doc } =
-        await import("firebase/firestore");
-
-      const q = query(
-        collection(this.db, "newsletter_subscriptions"),
-        where("email", "==", email)
-      );
-
-      const querySnapshot = await getDocs(q);
-
-      if (querySnapshot.empty) {
-        return createApiError("Email not found in subscriptions", "NOT_FOUND");
-      }
-
-      querySnapshot.forEach(async (docSnap) => {
-        await updateDoc(doc(this.db, "newsletter_subscriptions", docSnap.id), {
-          status: "unsubscribed",
-          unsubscribed_at: Timestamp.now(),
-        });
-      });
-
-      return createApiResponse({
-        message: "Successfully unsubscribed from newsletter",
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to unsubscribe from newsletter: ${error.message}`,
-        "UNSUBSCRIBE_ERROR"
-      );
-    }
-  }
-
-  async search(query, collections = [], filters = {}) {
-    try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const results = { communities: [], events: [], news: [] };
-      const searchTerm = query.toLowerCase();
-
-      // Search in specified collections or all by default
-      const collectionsToSearch =
-        collections.length > 0
-          ? collections
-          : ["communities", "events", "news"];
-
-      for (const collectionName of collectionsToSearch) {
-        const { collection, getDocs } = await import("firebase/firestore");
-        const querySnapshot = await getDocs(
-          collection(this.db, collectionName)
-        );
-
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const matchesSearch =
-            (data.name && data.name.toLowerCase().includes(searchTerm)) ||
-            (data.title && data.title.toLowerCase().includes(searchTerm)) ||
-            (data.description &&
-              data.description.toLowerCase().includes(searchTerm)) ||
-            (data.content && data.content.toLowerCase().includes(searchTerm)) ||
-            (data.tags &&
-              data.tags.some((tag) => tag.toLowerCase().includes(searchTerm)));
-
-          if (matchesSearch) {
-            results[collectionName].push({ id: doc.id, ...data });
-          }
-        });
-      }
-
-      return createApiResponse({
-        results,
-        query,
-        total: Object.values(results).reduce((acc, arr) => acc + arr.length, 0),
-      });
-    } catch (error) {
-      return createApiError(
-        `Failed to perform search: ${error.message}`,
-        "SEARCH_ERROR"
-      );
+      console.error("❌ Error subscribing to newsletter:", error);
+      throw createApiError(`Failed to subscribe to newsletter: ${error.message}`);
     }
   }
 
   async healthCheck() {
     try {
-      if (!this.isInitialized) {
+      if (!this.db) {
         await this.initialize();
       }
 
-      // Try a simple read operation to test connectivity
-      const { collection, limit, getDocs, query } = await import(
-        "firebase/firestore"
-      );
-      await getDocs(
-        query(collection(this.db, COLLECTION_NAMES.COMMUNITIES), limit(1))
-      );
+      // Simple health check - try to read from a collection
+      const { collection, getDocs, limit } = await import("firebase/firestore");
+      const testQuery = query(collection(this.db, COLLECTION_NAMES.COMMUNITIES), limit(1));
+      await getDocs(testQuery);
 
       return createApiResponse({
         status: "healthy",
         backend: "firebase",
-        timestamp: new Date().toISOString(),
-        projectId: this.firebaseApp.options.projectId,
+        timestamp: new Date().toISOString()
       });
     } catch (error) {
-      return createApiError(
-        `Firebase health check failed: ${error.message}`,
-        "HEALTH_CHECK_ERROR"
-      );
+      throw createApiError(`Firebase health check failed: ${error.message}`);
     }
   }
 
   async getStats() {
     try {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
+      const [communitiesResult, eventsResult, newsResult] = await Promise.all([
+        this.getCommunities(),
+        this.getEvents(),
+        this.getNews()
+      ]);
 
-      const { collection, getDocs } = await import("firebase/firestore");
-
-      const [communitiesSnapshot, eventsSnapshot, newsSnapshot] =
-        await Promise.all([
-          getDocs(collection(this.db, COLLECTION_NAMES.COMMUNITIES)),
-          getDocs(collection(this.db, COLLECTION_NAMES.EVENTS)),
-          getDocs(collection(this.db, COLLECTION_NAMES.NEWS)),
-        ]);
-
-      // Calculate additional stats
-      let totalMembers = 0;
-      let featuredCommunities = 0;
-
-      communitiesSnapshot.forEach((doc) => {
-        const data = doc.data();
-        totalMembers += data.members || 0;
-        if (data.featured) featuredCommunities++;
+      return createApiResponse({
+        communities: communitiesResult.data.total,
+        events: eventsResult.data.total,
+        news: newsResult.data.total,
+        backend: "firebase"
       });
-
-      const stats = {
-        communities: communitiesSnapshot.size,
-        events: eventsSnapshot.size,
-        news: newsSnapshot.size,
-        totalMembers,
-        featuredCommunities,
-        lastUpdated: new Date().toISOString(),
-      };
-
-      return createApiResponse({ stats });
     } catch (error) {
-      return createApiError(
-        `Failed to fetch stats: ${error.message}`,
-        "STATS_ERROR"
-      );
+      throw createApiError(`Failed to get stats: ${error.message}`);
     }
   }
 }
