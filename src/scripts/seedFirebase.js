@@ -17,24 +17,24 @@ import {
   doc,
   setDoc,
   Timestamp,
+  serverTimestamp,
 } from "firebase/firestore";
 
 // Firebase configuration from environment variables
 const firebaseConfig = {
-  apiKey: process.env.VITE_FIREBASE_API_KEY,
-  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.VITE_FIREBASE_APP_ID,
-  measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID,
+  apiKey: process.env.VITE_FIREBASE_API_KEY || "AIzaSyCRnofy4OrGwedkGrIDYBV1ddlH3w7IaoE",
+  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || "ai-recepies.firebaseapp.com",
+  projectId: process.env.VITE_FIREBASE_PROJECT_ID || "ai-recepies",
+  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET || "ai-recepies.firebasestorage.app",
+  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "717008887602",
+  appId: process.env.VITE_FIREBASE_APP_ID || "1:717008887602:web:d11a883d1c26841054012b",
+  measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID || "G-T70LN6XD4Q",
 };
 
-// Sample data (from MockBackend)
+// Sample data (from MockBackend) - Fixed timestamps and data structure
 const sampleData = {
   communities: [
     {
-      id: "1",
       name: "Douala Developers",
       location: "Douala, Littoral",
       region: "Littoral",
@@ -45,11 +45,11 @@ const sampleData = {
       tags: ["JavaScript", "Python", "Web Dev"],
       category: "Software Development",
       featured: true,
-      created_at: Timestamp.fromDate(new Date("2023-01-15")),
-      updated_at: Timestamp.fromDate(new Date("2025-01-15")),
+      status: "active",
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "2",
       name: "Yaounde Tech Hub",
       location: "Yaounde, Centre",
       region: "Centre",
@@ -60,11 +60,11 @@ const sampleData = {
       tags: ["Startups", "Innovation", "Coworking"],
       category: "Startup Ecosystem",
       featured: true,
-      created_at: Timestamp.fromDate(new Date("2022-11-20")),
-      updated_at: Timestamp.fromDate(new Date("2025-01-10")),
+      status: "active",
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "3",
       name: "Cameroon AI Alliance",
       location: "Multiple Locations",
       region: "Multiple",
@@ -75,11 +75,11 @@ const sampleData = {
       tags: ["AI", "ML", "Data Science"],
       category: "AI & Machine Learning",
       featured: true,
-      created_at: Timestamp.fromDate(new Date("2023-03-08")),
-      updated_at: Timestamp.fromDate(new Date("2025-01-12")),
+      status: "active",
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "4",
       name: "Women Techmakers Buea",
       location: "Buea, South West",
       region: "South West",
@@ -90,11 +90,11 @@ const sampleData = {
       tags: ["Women in Tech", "Mentorship", "Diversity"],
       category: "Women in Tech",
       featured: true,
-      created_at: Timestamp.fromDate(new Date("2022-06-14")),
-      updated_at: Timestamp.fromDate(new Date("2025-01-08")),
+      status: "active",
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "5",
       name: "Cameroon Blockchain Network",
       location: "Douala & Yaounde",
       region: "Multiple",
@@ -105,11 +105,11 @@ const sampleData = {
       tags: ["Blockchain", "Crypto", "Web3"],
       category: "Blockchain",
       featured: true,
-      created_at: Timestamp.fromDate(new Date("2023-09-22")),
-      updated_at: Timestamp.fromDate(new Date("2025-01-05")),
+      status: "active",
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "6",
       name: "Cameroon UX Community",
       location: "Limbe, South West",
       region: "South West",
@@ -120,13 +120,13 @@ const sampleData = {
       tags: ["UX Design", "UI", "Product"],
       category: "Design & UX",
       featured: true,
-      created_at: Timestamp.fromDate(new Date("2023-07-30")),
-      updated_at: Timestamp.fromDate(new Date("2025-01-03")),
+      status: "active",
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
   ],
   events: [
     {
-      id: "1",
       title: "Annual Cameroon Tech Conference",
       date: "2025-06-15",
       time: "09:00 AM - 05:00 PM",
@@ -137,10 +137,10 @@ const sampleData = {
         "Join the biggest tech event in Cameroon featuring keynote speakers, workshops, and networking opportunities.",
       type: "Conference",
       status: "upcoming",
-      created_at: Timestamp.now(),
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "2",
       title: "Women in Tech Mentorship Workshop",
       date: "2025-06-22",
       time: "02:00 PM - 05:00 PM",
@@ -151,10 +151,10 @@ const sampleData = {
         "Empowering the next generation of women tech leaders through mentorship and hands-on workshops.",
       type: "Workshop",
       status: "upcoming",
-      created_at: Timestamp.now(),
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "3",
       title: "AI & Machine Learning Bootcamp",
       date: "2025-07-08",
       time: "10:00 AM - 04:00 PM",
@@ -165,10 +165,10 @@ const sampleData = {
         "Intensive bootcamp covering fundamentals of AI and ML with practical applications for African markets.",
       type: "Bootcamp",
       status: "upcoming",
-      created_at: Timestamp.now(),
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "4",
       title: "Blockchain & Fintech Forum",
       date: "2025-07-15",
       time: "10:00 AM - 03:00 PM",
@@ -179,12 +179,12 @@ const sampleData = {
         "Discussing the future of financial technology and blockchain applications in the Cameroonian economy.",
       type: "Forum",
       status: "upcoming",
-      created_at: Timestamp.now(),
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
   ],
   news: [
     {
-      id: "1",
       title: "Douala Hackathon Winners Secure $50,000 Investment",
       date: "2025-05-20",
       excerpt:
@@ -194,10 +194,10 @@ const sampleData = {
         "https://readdy.ai/api/search-image?query=A%20professional%20tech%20conference%20or%20hackathon%20scene%20in%20Cameroon%2C%20with%20diverse%20African%20developers%20presenting%20their%20work%20on%20stage.%20Modern%20event%20space%20with%20audience%2C%20professional%20lighting%2C%20subtle%20Cameroon%20flag%20colors%20in%20the%20background%20decorations.&width=400&height=250&seq=news1&orientation=landscape",
       category: "Achievement & Awards",
       author: "Tech News Cameroon",
-      created_at: Timestamp.fromDate(new Date("2025-05-20")),
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
     {
-      id: "2",
       title: "Women Techmakers Buea Launches Scholarship Program",
       date: "2025-05-15",
       excerpt:
@@ -207,7 +207,8 @@ const sampleData = {
         "https://readdy.ai/api/search-image?query=A%20professional%20scene%20of%20African%20women%20in%20tech%20at%20a%20workshop%20or%20training%20session%20in%20Cameroon.%20Women%20engaged%20with%20laptops%20and%20technology%2C%20collaborative%20learning%20environment.%20Modern%20tech%20space%20with%20subtle%20Cameroon%20flag%20colors%20in%20the%20decor.&width=400&height=250&seq=news2&orientation=landscape",
       category: "Community News",
       author: "Women Techmakers Buea",
-      created_at: Timestamp.fromDate(new Date("2025-05-15")),
+      created_at: serverTimestamp(),
+      updated_at: serverTimestamp(),
     },
   ],
 };
@@ -224,25 +225,28 @@ async function seedFirestore() {
 
     // Seed communities
     console.log("🏘️  Seeding communities...");
-    for (const community of sampleData.communities) {
-      const { id, ...communityData } = community;
-      await setDoc(doc(db, "communities", id), communityData);
+    for (let i = 0; i < sampleData.communities.length; i++) {
+      const community = sampleData.communities[i];
+      const docId = (i + 1).toString(); // Use simple numeric IDs
+      await setDoc(doc(db, "communities", docId), community);
       console.log(`   ✅ Added community: ${community.name}`);
     }
 
     // Seed events
     console.log("📅 Seeding events...");
-    for (const event of sampleData.events) {
-      const { id, ...eventData } = event;
-      await setDoc(doc(db, "events", id), eventData);
+    for (let i = 0; i < sampleData.events.length; i++) {
+      const event = sampleData.events[i];
+      const docId = (i + 1).toString(); // Use simple numeric IDs
+      await setDoc(doc(db, "events", docId), event);
       console.log(`   ✅ Added event: ${event.title}`);
     }
 
     // Seed news
     console.log("📰 Seeding news...");
-    for (const article of sampleData.news) {
-      const { id, ...articleData } = article;
-      await setDoc(doc(db, "news", id), articleData);
+    for (let i = 0; i < sampleData.news.length; i++) {
+      const article = sampleData.news[i];
+      const docId = (i + 1).toString(); // Use simple numeric IDs
+      await setDoc(doc(db, "news", docId), article);
       console.log(`   ✅ Added news: ${article.title}`);
     }
 
@@ -254,30 +258,19 @@ async function seedFirestore() {
     console.log(`   Events: ${sampleData.events.length}`);
     console.log(`   News Articles: ${sampleData.news.length}`);
     console.log("");
-    console.log(
-      "🔄 You can now switch to Firebase backend by updating your .env:"
-    );
+    console.log("🔄 You can now switch to Firebase backend by updating your .env:");
     console.log("   VITE_BACKEND_TYPE=firebase");
+    console.log("");
+    console.log("🎯 Next Steps:");
+    console.log("   1. Update your .env file: VITE_BACKEND_TYPE=firebase");
+    console.log("   2. Restart your development server");
+    console.log("   3. Visit /test-backend to verify Firebase integration");
+    console.log("   4. Check your Firebase Console to see the data");
   } catch (error) {
     console.error("❌ Error seeding Firestore:", error);
+    console.error("Error details:", error.message);
     process.exit(1);
   }
-}
-
-// Load environment variables if running in Node.js
-if (typeof process !== "undefined" && process.env) {
-  // For Node.js execution, ensure environment variables are loaded
-  const envConfig = {
-    VITE_FIREBASE_API_KEY: "AIzaSyCRnofy4OrGwedkGrIDYBV1ddlH3w7IaoE",
-    VITE_FIREBASE_AUTH_DOMAIN: "ai-recepies.firebaseapp.com",
-    VITE_FIREBASE_PROJECT_ID: "ai-recepies",
-    VITE_FIREBASE_STORAGE_BUCKET: "ai-recepies.firebasestorage.app",
-    VITE_FIREBASE_MESSAGING_SENDER_ID: "717008887602",
-    VITE_FIREBASE_APP_ID: "1:717008887602:web:d11a883d1c26841054012b",
-    VITE_FIREBASE_MEASUREMENT_ID: "G-T70LN6XD4Q",
-  };
-
-  Object.assign(process.env, envConfig);
 }
 
 // Run the seeder
