@@ -2,29 +2,29 @@ export const REGIONS = [
   "All Regions",
   "Littoral",
   "Centre",
-  "South West",
-  "North West",
+  // "South West",
+  // "North West",
   "West",
-  "East",
+  // "East",
   "Adamawa",
-  "North",
+  // "North",
   "Far North",
-  "South",
+  // "South",
 ];
 
 export const COMMUNITY_TYPES = [
   "Software Development",
-  "AI & Machine Learning",
-  "Startup Ecosystem",
+  // "AI & Machine Learning",
+  // "Startup Ecosystem",
   "Design & UX",
-  "Blockchain",
+  // "Blockchain",
   "Women in Tech",
-  "Mobile Development",
+  // "Mobile Development",
   "Data Science",
   "DevOps & Cloud",
   "Cybersecurity",
-  "IoT & Hardware",
-  "Game Development",
+  // "IoT & Hardware",
+  // "Game Development",
 ];
 
 export const CONTACT_SUBJECTS = [
@@ -32,9 +32,9 @@ export const CONTACT_SUBJECTS = [
   "List My Community",
   "Event Promotion",
   "Partnership Opportunity",
-  "Technical Support",
-  "Media & Press",
-  "Sponsorship",
+  // "Technical Support",
+  // "Media & Press",
+  // "Sponsorship",
   "Feedback & Suggestions",
 ];
 
@@ -73,6 +73,7 @@ export const COMMUNITY_TAGS = [
   // Programming Languages
   "JavaScript",
   "Python",
+  "Dart",
   "Java",
   "TypeScript",
   "PHP",
@@ -84,6 +85,7 @@ export const COMMUNITY_TAGS = [
 
   // Frameworks & Technologies
   "React",
+  "Flutter",
   "Vue.js",
   "Angular",
   "Node.js",
@@ -402,3 +404,51 @@ export const API_RESPONSE_CODES = {
   RATE_LIMITED: "RATE_LIMITED",
   SERVER_ERROR: "SERVER_ERROR",
 };
+
+
+
+ 
+// Image Upload Configuration
+export const IMAGE_UPLOAD_CONFIG = {
+  PROVIDER: "cloudinary",
+  CLOUDINARY: {
+    // CLOUD_NAME: process.env.REACT_APP_CLOUDINARY_CLOUD_NAME,
+    // UPLOAD_PRESET: process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET,
+    // API_KEY: process.env.REACT_APP_CLOUDINARY_API_KEY ||'',
+    MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB
+    ALLOWED_FORMATS: ["jpg", "jpeg", "png", "webp", "gif"],
+    FOLDER_STRUCTURE: {
+      COMMUNITIES: "communities",
+      EVENTS: "events",
+      NEWS: "news",
+      AVATARS: "avatars",
+    },
+    TRANSFORMATIONS: {
+      THUMBNAIL: "w_150,h_150,c_fill,q_auto,f_auto",
+      SMALL: "w_300,h_200,c_fill,q_auto,f_auto",
+      MEDIUM: "w_600,h_400,c_fill,q_auto,f_auto",
+      LARGE: "w_1200,h_800,c_fill,q_auto,f_auto",
+      AVATAR: "w_100,h_100,c_fill,g_face,q_auto,f_auto",
+    },
+    QUALITY: {
+      AUTO: "q_auto",
+      LOW: "q_30",
+      MEDIUM: "q_60",
+      HIGH: "q_80",
+    },
+  },
+  FALLBACK_IMAGES: {
+    COMMUNITY_LOGO: "/images/default-community.png",
+    EVENT_BANNER: "/images/default-event.png",
+    USER_AVATAR: "/images/default-user.png",
+    NEWS_IMAGE: "/images/default-news.png",
+  },
+  UPLOAD_ERRORS: {
+    FILE_TOO_LARGE: "File size exceeds 10MB limit",
+    INVALID_FORMAT: "Invalid file format. Please use JPG, PNG, or WebP",
+    UPLOAD_FAILED: "Upload failed. Please try again",
+    NETWORK_ERROR: "Network error. Check your connection",
+  },
+};
+
+ 
