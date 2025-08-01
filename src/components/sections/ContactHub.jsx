@@ -1,37 +1,47 @@
 import React, { useState } from 'react';
 import { CONTACT_SUBJECTS } from '../../utils/constants';
-import { submitContact } from '../../services/api';
 import LoadingSpinner from '../common/LoadingSpinner';
 
 const ContactHub = () => {
+  // GitHub repository URL
+  const GITHUB_REPO = "https://github.com/Nde-Dilan/community-finder";
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: 'General Inquiry',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
+    
+    // Create GitHub issue URL with form data pre-filled
+    const issueTitle = `[CONTACT] ${formData.subject} - ${formData.name}`;
+    const issueBody = `## Contact Information
+**Name:** ${formData.name}
+**Email:** ${formData.email}
+**Subject:** ${formData.subject}
 
-    try {
-      await submitContact(formData);
-      setSubmitStatus({ type: 'success', message: 'Message sent successfully!' });
-      setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
-    } catch (error) {
-      setSubmitStatus({ type: 'error', message: 'Failed to send message.  Please try again.' });
-    } finally {
-      setIsSubmitting(false);
-    }
+## Message
+${formData.message}
+
+---
+*This issue was created from the Community Finder contact form.*`;
+
+    const githubUrl = `${GITHUB_REPO}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}&labels=contact,needs-response`;
+    
+    window.open(githubUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleCommunitySubmit = () => {
+    const communityUrl = `${GITHUB_REPO}/issues/new?template=community-submission.md&labels=community-submission,needs-review`;
+    window.open(communityUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -106,24 +116,13 @@ const ContactHub = () => {
                     required
                   />
                 </div>
-
-                {submitStatus && (
-                  <div className={`mb-4 p-3 rounded ${
-                    submitStatus.type === 'success' 
-                      ? 'bg-green-100 text-green-700' 
-                      : 'bg-red-100 text-red-700'
-                  }`}>
-                    {submitStatus.message}
-                  </div>
-                )}
                 
                 <button 
                   type="submit" 
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 bg-[var(--primary)] text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center disabled:opacity-50"
+                  className="w-full px-6 py-3 bg-[var(--primary)] text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center"
                 >
-                  {isSubmitting ? <LoadingSpinner size="small" className="mr-2" /> : null}
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  <i className="ri-github-line ri-lg mr-2"></i>
+                  Send Message via GitHub
                 </button>
               </form>
             </div>
@@ -178,7 +177,10 @@ const ContactHub = () => {
                 </div>
               </div>
               
-              <button className="w-full px-6 py-3 bg-[var(--primary)] text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center">
+              <button 
+                onClick={handleCommunitySubmit}
+                className="w-full px-6 py-3 bg-[var(--primary)] text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center"
+              >
                 <i className="ri-community-line ri-lg mr-2"></i>
                 Submit Your Community
               </button>
