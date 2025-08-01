@@ -26,9 +26,9 @@ const Header = () => {
                 </nav>
                 
                 <div className="flex items-center space-x-4">
-                    <button className="hidden md:flex items-center justify-center px-4 py-2 border border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition duration-300 rounded-button whitespace-nowrap">
-                        Sign In
-                    </button>
+                    <a href='/local-gems' className="hidden md:flex items-center justify-center px-4 py-2 border border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)] hover:text-white transition duration-300 rounded-button whitespace-nowrap">
+                        Local Gems
+                    </a>
                     <button className="hidden md:flex items-center justify-center px-4 py-2 bg-[var(--primary)] text-white hover:bg-[var(--primary)]/90 transition duration-300 rounded-button whitespace-nowrap">
                         Join Community
                     </button>
