@@ -1,7 +1,10 @@
 import React from 'react';
-import { Plus, Upload, Users, MessageSquare, GitBranch, Heart } from 'lucide-react';
+import { Plus, Upload, Users, MessageSquare, GitBranch, Heart, Bug } from 'lucide-react';
 
 const ContributeSection = () => {
+  // GitHub repository URL
+  const GITHUB_REPO = "https://github.com/Nde-Dilan/community-finder";
+  
   const contributeOptions = [
     {
       icon: Plus,
@@ -9,7 +12,8 @@ const ContributeSection = () => {
       description: "Share your amazing projects with the community. Get feedback, find collaborators, and inspire others.",
       action: "Submit Project",
       color: "from-green-500 to-green-600",
-      border: "border-green-400/30"
+      border: "border-green-400/30",
+      templateUrl: `${GITHUB_REPO}/issues/new?template=project-submission.md&labels=project-submission,needs-review`
     },
     {
       icon: Upload,
@@ -17,25 +21,32 @@ const ContributeSection = () => {
       description: "Built something useful? Add your tool or library to our showcase and help other developers.",
       action: "Add Tool",
       color: "from-red-500 to-red-600",
-      border: "border-red-400/30"
+      border: "border-red-400/30",
+      templateUrl: `${GITHUB_REPO}/issues/new?template=tool-submission.md&labels=tool-submission,needs-review`
     },
     {
-      icon: GitBranch,
-      title: "Contribute to Open Source",
-      description: "Help improve existing projects. Find issues to work on and make meaningful contributions.",
-      action: "Find Issues",
+      icon: Bug,
+      title: "Report Website Issue",
+      description: "Found a bug or issue with our website? Help us improve by reporting it.",
+      action: "Report Issue",
       color: "from-yellow-500 to-amber-600",
-      border: "border-yellow-400/30"
+      border: "border-yellow-400/30",
+      templateUrl: `${GITHUB_REPO}/issues/new?template=bug-report.md&labels=bug,website,needs-triage`
     },
     {
       icon: MessageSquare,
       title: "Join Discussions",
       description: "Share ideas, ask questions, and help other developers. Be part of our growing community.",
       action: "Start Discussion",
-      color: "from-green-600 to-emerald-600",
-      border: "border-green-400/30"
+      color: "from-blue-500 to-blue-600",
+      border: "border-blue-400/30",
+      templateUrl: `${GITHUB_REPO}/discussions`
     }
   ];
+
+  const handleContributeClick = (templateUrl) => {
+    window.open(templateUrl, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <section className="relative py-20 bg-gradient-to-br from-green-900 via-red-900 to-yellow-900 text-white">
@@ -88,7 +99,10 @@ const ContributeSection = () => {
                 {option.description}
               </p>
               
-              <button className={`w-full bg-white/20 hover:bg-white/30 border ${option.border} hover:border-white/40 rounded-xl py-3 px-4 font-medium transition-all duration-300 text-sm`}>
+              <button 
+                onClick={() => handleContributeClick(option.templateUrl)}
+                className={`w-full bg-white/20 hover:bg-white/30 border ${option.border} hover:border-white/40 rounded-xl py-3 px-4 font-medium transition-all duration-300 text-sm hover:scale-105 active:scale-95`}
+              >
                 {option.action}
               </button>
             </div>

@@ -12,7 +12,8 @@ export class SupabaseBackend extends BaseBackend {
   async initialize() {
     try {
       // Dynamic import of Supabase to avoid loading unless needed
-      const { createClient } = await import("@supabase/supabase-js");
+      // const { createClient } = await import("@supabase/supabase-js");
+      const { createClient } = "";
 
       this.supabase = createClient(this.config.url, this.config.anonKey);
 
