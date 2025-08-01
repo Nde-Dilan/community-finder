@@ -225,7 +225,7 @@ function CommunitySpotlights() {
 
 ### For Backend Implementation:
 
-- [ ] Choose backend (Firebase/Supabase)
+- [X] Choose backend (Firebase/Supabase)
 - [ ] Install dependencies
 - [ ] Set up backend project
 - [ ] Implement data models/schemas
