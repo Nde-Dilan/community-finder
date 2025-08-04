@@ -25,8 +25,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/community/:id" element={<CommunityProfilePage />} />
             <Route path="/local-gems" element={<LocalGems />} />
-            <Route path="/events" element={<EventsPage />} />
-            <Route path="/news" element={<NewsPage />} />
+            {/* <Route path="/events" element={<EventsPage />} /> */}
+            {/* <Route path="/news" element={<NewsPage />} /> */}
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/test-backend" element={<BackendTestComponent />} />
             <Route path="*" element={<NotFoundPage />} />

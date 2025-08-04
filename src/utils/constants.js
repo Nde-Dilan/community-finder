@@ -4,11 +4,11 @@ export const REGIONS = [
   "Centre",
   // "South West",
   // "North West",
-  "West",
+  // "West",
   // "East",
   "Adamawa",
   // "North",
-  "Far North",
+  // "Far North",
   // "South",
 ];
 
@@ -20,9 +20,9 @@ export const COMMUNITY_TYPES = [
   // "Blockchain",
   "Women in Tech",
   // "Mobile Development",
-  "Data Science",
+  // "Data Science",
   "DevOps & Cloud",
-  "Cybersecurity",
+  // "Cybersecurity",
   // "IoT & Hardware",
   // "Game Development",
 ];

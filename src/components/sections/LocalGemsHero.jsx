@@ -3,10 +3,30 @@ import { Code, Wrench, Lightbulb, Users } from "lucide-react";
 
 const LocalGemsHero = () => {
   const stats = [
-    { icon: Code, label: "Open Source Tools", value: "25+", color: "from-green-500 to-green-600" },
-    { icon: Wrench, label: "Local Frameworks", value: "12+", color: "from-red-500 to-red-600" },
-    { icon: Lightbulb, label: "Featured Projects", value: "40+", color: "from-yellow-500 to-amber-600" },
-    { icon: Users, label: "Contributing Developers", value: "150+", color: "from-green-600 to-emerald-600" },
+    {
+      icon: Code,
+      label: "Open Source Tools",
+      value: "25+",
+      color: "from-green-500 to-green-600",
+    },
+    {
+      icon: Wrench,
+      label: "Local Frameworks",
+      value: "3+",
+      color: "from-red-500 to-red-600",
+    },
+    {
+      icon: Lightbulb,
+      label: "Featured Projects",
+      value: "40+",
+      color: "from-yellow-500 to-amber-600",
+    },
+    {
+      icon: Users,
+      label: "Contributing Developers",
+      value: "150+",
+      color: "from-green-600 to-emerald-600",
+    },
   ];
 
   return (
@@ -51,10 +71,10 @@ const LocalGemsHero = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg border border-green-400/30">
-              Explore Tools
+              <a href="#tools"> Explore Tools</a>
             </button>
             <button className="border-2 border-yellow-400/50 hover:border-yellow-400/70 px-8 py-4 rounded-xl font-semibold transition-all duration-300 backdrop-blur-sm hover:bg-yellow-500/10 text-yellow-100 hover:text-white">
-              Submit Your Project
+              <a href="#add-project"> Submit Your Project</a>
             </button>
           </div>
         </div>
@@ -66,7 +86,9 @@ const LocalGemsHero = () => {
               key={index}
               className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white/15 transition-all duration-300 border border-white/10 hover:border-white/20"
             >
-              <div className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg`}>
+              <div
+                className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mx-auto mb-4 shadow-lg`}
+              >
                 <stat.icon className="w-6 h-6 text-white" />
               </div>
               <div className="text-3xl font-bold mb-2">{stat.value}</div>

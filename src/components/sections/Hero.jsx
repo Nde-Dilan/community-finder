@@ -57,7 +57,8 @@ const Hero = () => {
             </button>
             <button className="px-6 py-3 bg-white text-[var(--primary)] font-medium border-2 border-white hover:bg-white/90 rounded-button whitespace-nowrap flex items-center justify-center">
               <i className="ri-calendar-event-line ri-lg mr-2"></i>
-              Find Events
+              <a href="#events"> Find Events</a>
+             
             </button>
           </div>
         </div>

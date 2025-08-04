@@ -13,11 +13,11 @@ const HomePage = () => {
     <>
       <Hero />
       <InteractiveMap />
-      <FeaturedCommunities />
+      {/* <FeaturedCommunities /> */}
       <CommunitiesDirectory />
       <EventsTimeline />
       <CommunitySpotlights />
-      <NewsFeed />
+      {/* <NewsFeed /> */}
       <ContactHub />
     </>
   );

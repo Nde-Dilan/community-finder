@@ -248,7 +248,7 @@ const ToolsShowcase = () => {
   const featuredTools = tools.filter(tool => tool.featured);
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section id="tools" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -297,12 +297,15 @@ const ToolsShowcase = () => {
                     <div className="flex gap-2">
                       <a 
                         href={tool.github}
+                                                target='_blank'
+
                         className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
                       >
                         <Github className="w-4 h-4" />
                       </a>
                       <a 
                         href={tool.website}
+                        target='_blank'
                         className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center hover:bg-white/30 transition-colors"
                       >
                         <ExternalLink className="w-4 h-4" />

@@ -94,6 +94,8 @@ const EventsTimeline = () => {
     }
   );
 
+  
+
   if (loading) {
     return (
       <section id="events" className="py-16 cameroon-gradient">
@@ -108,6 +110,26 @@ const EventsTimeline = () => {
             </p>
           </div>
           <LoadingSpinner size="large" />
+        </div>
+      </section>
+    );
+  }
+  if (data.events.length <=0) {
+    return (
+      <section id="events" className="py-16 cameroon-gradient">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Upcoming Tech Events
+            </h2>
+            <p className="text-gray-600 max-w-3xl mx-auto">
+              Stay updated with the latest tech events, workshops, and meetups
+              happening across Cameroon's vibrant tech ecosystem.
+            </p>
+            <br /><br />
+          <span>No event for now!</span>
+          </div>
+          {/* <LoadingSpinner size="large" /> */}
         </div>
       </section>
     );
