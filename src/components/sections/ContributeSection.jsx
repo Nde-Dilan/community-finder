@@ -49,7 +49,7 @@ const ContributeSection = () => {
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-green-900 via-red-900 to-yellow-900 text-white">
+    <section id="add-project" className="relative py-20 bg-gradient-to-br from-green-900 via-red-900 to-yellow-900 text-white">
       {/* Cameroon flag inspired background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{

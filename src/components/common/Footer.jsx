@@ -29,11 +29,11 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Home</a></li>
+              <li><a href="/" className="text-gray-400 hover:text-white transition">Home</a></li>
               <li><a href="#communities" className="text-gray-400 hover:text-white transition">Communities</a></li>
               <li><a href="#events" className="text-gray-400 hover:text-white transition">Events</a></li>
               <li><a href="#map" className="text-gray-400 hover:text-white transition">Map</a></li>
-              <li><a href="#news" className="text-gray-400 hover:text-white transition">News</a></li>
+              {/* <li><a href="#news" className="text-gray-400 hover:text-white transition">News</a></li> */}
               <li><a href="#contact" className="text-gray-400 hover:text-white transition">Contact</a></li>
             </ul>
           </div>
@@ -41,12 +41,12 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-6">Communities</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Software Development</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">AI & Data Science</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Startup Ecosystem</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Design & UX</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Blockchain</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Women in Tech</a></li>
+              <li><a href="#communities-directory" className="text-gray-400 hover:text-white transition">Software Development</a></li>
+              <li><a href="#communities-directory" className="text-gray-400 hover:text-white transition">AI & Data Science</a></li>
+              <li><a href="#communities-directory" className="text-gray-400 hover:text-white transition">Startup Ecosystem</a></li>
+              <li><a href="#communities-directory" className="text-gray-400 hover:text-white transition">Design & UX</a></li>
+              <li><a href="#communities-directory" className="text-gray-400 hover:text-white transition">Blockchain</a></li>
+              <li><a href="#communities-directory" className="text-gray-400 hover:text-white transition">Women in Tech</a></li>
             </ul>
           </div>
           
@@ -55,7 +55,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <i className="ri-map-pin-line text-gray-400 mt-1 mr-3"></i>
-                <span className="text-gray-400">Akwa, Douala, Cameroon</span>
+                <span className="text-gray-400">Nyom, Yaoundé, Cameroon</span>
               </li>
               <li className="flex items-start">
                 <i className="ri-mail-line text-gray-400 mt-1 mr-3"></i>

@@ -11,6 +11,9 @@ const FeaturedCommunities = () => {
   });
   const carouselRef = useRef(null);
 
+  console.dir("Data fetchted from <FeaturedCommunities/>: "+ data);
+  
+
   const scroll = (direction) => {
     const cardWidth = 300 + 24; // card width + gap
     const scrollAmount = direction === "next" ? cardWidth : -cardWidth;
@@ -89,7 +92,7 @@ const FeaturedCommunities = () => {
             ref={carouselRef}
             className="carousel flex space-x-6 overflow-x-auto pb-6"
           >
-            {data?.communities?.map((community) => (
+            {data?.map((community) => (
               <CommunityCard key={community.id} community={community} />
             ))}
           </div>

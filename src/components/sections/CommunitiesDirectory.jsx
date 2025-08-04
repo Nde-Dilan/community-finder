@@ -195,7 +195,7 @@ const CommunitiesDirectory = () => {
                       key={community.id}
                       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
                     >
-                      <div className="h-40 bg-gray-100 flex items-center justify-center">
+                      <div className="h-40 bg-[#FFFFFF] flex items-center justify-center">
                         <img
                           src={community.logo}
                           alt={community.name}
@@ -209,7 +209,7 @@ const CommunitiesDirectory = () => {
                         </h3>
                         <div className="flex items-center text-gray-500 mb-3">
                           <i className="ri-map-pin-line mr-1"></i>
-                          <span className="text-sm">{community.location}</span>
+                          <span className="text-sm">{community.description}</span>
                         </div>
                         <div className="flex items-center text-gray-500 mb-3">
                           <i className="ri-user-line mr-1"></i>
@@ -245,7 +245,7 @@ const CommunitiesDirectory = () => {
                           onClick={() => handleViewProfile(community.id)}
                           className="w-full px-4 py-2 bg-[var(--primary)] text-white rounded-button whitespace-nowrap"
                         >
-                          View Profile
+                          <a href={community.links}> Explore Community</a>
                         </button>
                       </div>
                     </div>
