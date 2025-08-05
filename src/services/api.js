@@ -29,7 +29,7 @@ export const fetchFeaturedCommunities = async () => {
           "Dot NET Cameroun is a community for .NET developers in Cameroon. It provides a platform for professionals and enthusiasts to learn, share, and develop their skills in .NET technologies, including web, desktop, and cloud applications.",
         logo: "/communities/dot-net.png",
         tags: ["C#", ".NET Core", "Azure"],
-         links:  "https://dotnetcameroon.azurewebsites.net/",
+         links:  "https://dotnet.cm",
       },
       {
         id: 3,
@@ -357,7 +357,7 @@ export const fetchSimilarCommunities = async (currentId) => {
     },
     {
       title: "Dot NET Cameroun",
-      href: "https://dotnetcameroon.azurewebsites.net/",
+      href: "https://dotnet.cm",
       dates: "June 2019 - Present",
       active: true,
       description: "Dot NET Cameroun is a community for .NET developers in Cameroon. It provides a platform for professionals and enthusiasts to learn, share, and develop their skills in .NET technologies, including web, desktop, and cloud applications.",
@@ -373,7 +373,7 @@ export const fetchSimilarCommunities = async (currentId) => {
       links: [
         {
           type: "Website",
-          href: "https://dotnetcameroon.azurewebsites.net/",
+          href: "https://dotnet.cm",
           icon: <Icons.globe className='size-3' />
         },
         {

@@ -60,7 +60,7 @@ const sampleData = {
       tags: ["C#", ".NET Core", "Azure"],
       created_at: serverTimestamp(),
       updated_at: serverTimestamp(),
-      links: "https://dotnetcameroon.azurewebsites.net/",
+      links: "https://dotnet.cm",
     },
     {
       id: 3,
