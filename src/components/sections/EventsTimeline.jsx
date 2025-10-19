@@ -24,11 +24,11 @@ const EventCard = ({ event, index }) => {
       <div
         className={`md:w-1/2 ${
           isRight
-            ? "md:pl-12 mb-8 md:mb-0 md:order-2"
-            : "md:pr-12 md:text-right mb-8 md:mb-0"
+            ? "md:pl-12 mb-6 md:mb-0 md:order-2"
+            : "md:pr-12 md:text-right mb-6 md:mb-0"
         }`}
       >
-        <div className="bg-white rounded-lg shadow-md p-6 inline-block">
+        <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 md:p-5 lg:p-6 inline-block w-full md:w-auto">
           <div
             className={`inline-block px-3 py-1 ${
               typeColors[event.type]
@@ -36,8 +36,8 @@ const EventCard = ({ event, index }) => {
           >
             {event.date}
           </div>
-          <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-          <p className="text-gray-600 mb-3">{event.description}</p>
+          <h3 className="text-lg md:text-xl font-bold mb-2">{event.title}</h3>
+          <p className="text-gray-600 mb-3 text-sm md:text-base">{event.description}</p>
           <div
             className={`flex items-center ${
               isRight ? "" : "justify-end"
@@ -63,9 +63,9 @@ const EventCard = ({ event, index }) => {
             <span className="text-sm">Hosted by {event.host}</span>
           </div>
           <button
-            className={`px-4 py-2 ${
+            className={`px-3 md:px-4 py-2 ${
               buttonColors[event.type]
-            } rounded-button whitespace-nowrap`}
+            } rounded-button whitespace-nowrap text-sm md:text-base`}
           >
             Register Now
           </button>
@@ -151,13 +151,13 @@ const EventsTimeline = () => {
   }
 
   return (
-    <section id="events" className="py-16 cameroon-gradient">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <section id="events" className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 cameroon-gradient">
+      <div className="container mx-auto">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
             Upcoming Tech Events
           </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
             Stay updated with the latest tech events, workshops, and meetups
             happening across Cameroon's vibrant tech ecosystem.
           </p>
@@ -167,14 +167,14 @@ const EventsTimeline = () => {
           {/* Timeline Connector (Desktop) */}
           <div className="hidden md:block timeline-connector"></div>
 
-          <div className="space-y-8 relative">
+          <div className="space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 relative">
             {data?.events?.map((event, index) => (
               <EventCard key={event.id} event={event} index={index} />
             ))}
           </div>
 
-          <div className="mt-12 flex justify-center">
-            <button className="px-6 py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-button whitespace-nowrap flex items-center justify-center hover:bg-gray-50">
+          <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 flex justify-center">
+            <button className="px-4 sm:px-6 py-2 sm:py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-button whitespace-nowrap flex items-center justify-center hover:bg-gray-50 text-sm sm:text-base">
               <i className="ri-calendar-line ri-lg mr-2"></i>
               View All Events
             </button>

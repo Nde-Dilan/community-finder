@@ -47,20 +47,20 @@ ${formData.message}
   };
 
   return (
-    <section id="contact" className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+    <section id="contact" className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
+      <div className="container mx-auto">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">Get In Touch</h2>
+          <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
             Have questions about tech communities in Cameroon? Want to list your
             community? We're here to help.
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8">
-          <div className="w-full md:w-1/2">
-            <div className="bg-gray-50 rounded-lg p-8">
-              <h3 className="text-2xl font-bold mb-6">Contact Us</h3>
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+          <div className="w-full lg:w-1/2">
+            <div className="bg-gray-50 rounded-lg p-3 sm:p-4 md:p-6 lg:p-8">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Contact Us</h3>
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -144,7 +144,7 @@ ${formData.message}
 
                 <button
                   type="submit"
-                  className="w-full px-6 py-3 bg-[var(--primary)] text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center"
+                  className="w-full px-4 md:px-6 py-2 md:py-3 bg-[var(--primary)] text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center text-sm md:text-base"
                 >
                   <i className="ri-github-line ri-lg mr-2"></i>
                   Send Message via GitHub
@@ -153,61 +153,61 @@ ${formData.message}
             </div>
           </div>
 
-          <div className="w-full md:w-1/2" id="add-community">
-            <div className="bg-gray-50 rounded-lg p-8 h-full">
-              <h3 className="text-2xl font-bold mb-6">Submit Your Community</h3>
-              <p className="text-gray-600 mb-6">
+          <div className="w-full lg:w-1/2" id="add-community">
+            <div className="bg-gray-50 rounded-lg p-3 sm:p-4 md:p-6 lg:p-8 h-full">
+              <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Submit Your Community</h3>
+              <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">
                 Are you running a tech community in Cameroon? Get it listed on
                 our platform to increase visibility and connect with more
                 members.
               </p>
 
-              <div className="space-y-6 mb-8">
+              <div className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6 mb-6 md:mb-8">
                 <div className="flex items-start">
-                  <div className="w-10 h-10 flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] rounded-full mt-1 mr-4 flex-shrink-0">
-                    <i className="ri-check-line ri-lg"></i>
+                  <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] rounded-full mt-1 mr-3 md:mr-4 flex-shrink-0">
+                    <i className="ri-check-line ri-sm md:ri-lg"></i>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Free Listing</h4>
-                    <p className="text-gray-600 text-sm">
+                    <h4 className="font-semibold mb-1 text-sm md:text-base">Free Listing</h4>
+                    <p className="text-gray-600 text-xs md:text-sm">
                       Basic community profile with essential information
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-10 h-10 flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] rounded-full mt-1 mr-4 flex-shrink-0">
-                    <i className="ri-check-line ri-lg"></i>
+                  <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] rounded-full mt-1 mr-3 md:mr-4 flex-shrink-0">
+                    <i className="ri-check-line ri-sm md:ri-lg"></i>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Event Promotion</h4>
-                    <p className="text-gray-600 text-sm">
+                    <h4 className="font-semibold mb-1 text-sm md:text-base">Event Promotion</h4>
+                    <p className="text-gray-600 text-xs md:text-sm">
                       Share your community events on our calendar
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-10 h-10 flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] rounded-full mt-1 mr-4 flex-shrink-0">
-                    <i className="ri-check-line ri-lg"></i>
+                  <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] rounded-full mt-1 mr-3 md:mr-4 flex-shrink-0">
+                    <i className="ri-check-line ri-sm md:ri-lg"></i>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">
+                    <h4 className="font-semibold mb-1 text-sm md:text-base">
                       Networking Opportunities
                     </h4>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 text-xs md:text-sm">
                       Connect with other communities and potential partners
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start">
-                  <div className="w-10 h-10 flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] rounded-full mt-1 mr-4 flex-shrink-0">
-                    <i className="ri-check-line ri-lg"></i>
+                  <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-[var(--primary)]/10 text-[var(--primary)] rounded-full mt-1 mr-3 md:mr-4 flex-shrink-0">
+                    <i className="ri-check-line ri-sm md:ri-lg"></i>
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Resource Access</h4>
-                    <p className="text-gray-600 text-sm">
+                    <h4 className="font-semibold mb-1 text-sm md:text-base">Resource Access</h4>
+                    <p className="text-gray-600 text-xs md:text-sm">
                       Get access to exclusive resources for community growth
                     </p>
                   </div>
@@ -216,44 +216,44 @@ ${formData.message}
 
               <button
                 onClick={handleCommunitySubmit}
-                className="w-full px-6 py-3 bg-[var(--primary)] text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center"
+                className="w-full px-4 md:px-6 py-2 md:py-3 bg-[var(--primary)] text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center text-sm md:text-base"
               >
                 <i className="ri-community-line ri-lg mr-2"></i>
                 Submit Your Community
               </button>
 
-              <div className="mt-8">
-                <h4 className="font-semibold mb-4">Connect With Us</h4>
-                <div className="flex space-x-4">
+              <div className="mt-6 md:mt-8">
+                <h4 className="font-semibold mb-3 md:mb-4 text-sm md:text-base">Connect With Us</h4>
+                <div className="flex space-x-3 md:space-x-4">
                   <a
                     href="#"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
+                    className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
                   >
-                    <i className="ri-twitter-x-line"></i>
+                    <i className="ri-twitter-x-line ri-sm md:ri-base"></i>
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
+                    className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
                   >
-                    <i className="ri-facebook-fill"></i>
+                    <i className="ri-facebook-fill ri-sm md:ri-base"></i>
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
+                    className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
                   >
-                    <i className="ri-linkedin-fill"></i>
+                    <i className="ri-linkedin-fill ri-sm md:ri-base"></i>
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
+                    className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
                   >
-                    <i className="ri-instagram-line"></i>
+                    <i className="ri-instagram-line ri-sm md:ri-base"></i>
                   </a>
                   <a
                     href="#"
-                    className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
+                    className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-[var(--primary)] hover:text-white transition"
                   >
-                    <i className="ri-whatsapp-line"></i>
+                    <i className="ri-whatsapp-line ri-sm md:ri-base"></i>
                   </a>
                 </div>
               </div>
