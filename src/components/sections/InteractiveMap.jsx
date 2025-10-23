@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { REGIONS, COMMUNITY_TYPES } from '../../utils/constants';
+import TripleStripeLine from '../common/Underline';
 
 const InteractiveMap = () => {
   const [filters, setFilters] = useState({
@@ -36,20 +37,23 @@ const InteractiveMap = () => {
   };
 
   return (
-    <section id="map" className="py-16 bg-white">
+    <section id="map" className="py-8 md:py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Explore Tech Communities Across Cameroon</h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">Explore Tech Communities Across Cameroon</h2>
+          <div className="mb-4">
+            <TripleStripeLine width="w-1/6" height="h-2" className="mx-auto" colors={["bg-green-500", "bg-red-500", "bg-yellow-500"]}/>
+          </div>
+          <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
             Discover tech communities and upcoming events throughout Cameroon with our interactive map. Filter by region, category, or event type.
           </p>
         </div>
         
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="flex flex-col md:flex-row">
+          <div className="flex flex-col lg:flex-row">
             {/* Map Filters Sidebar */}
-            <div className="w-full md:w-1/4 bg-gray-50 p-5 border-r border-gray-200">
-              <h3 className="font-semibold text-lg mb-4">Filters</h3>
+            <div className="w-full lg:w-1/4 bg-gray-50 p-4 md:p-5 border-b lg:border-b-0 lg:border-r border-gray-200">
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Filters</h3>
               
               <div className="mb-5">
                 <label className="block text-gray-700 font-medium mb-2">Region</label>
@@ -125,8 +129,8 @@ const InteractiveMap = () => {
             </div>
             
             {/* Map Container */}
-            <div className="w-full md:w-3/4">
-              <div className="map-container h-[500px] relative">
+            <div className="w-full lg:w-3/4">
+              <div className="map-container h-[300px] md:h-[400px] lg:h-[500px] relative">
                 {/* Map Markers (Placeholder) */}
                 <div className="absolute top-1/4 left-1/3 w-6 h-6 bg-[var(--primary)] rounded-full pulse flex items-center justify-center text-white text-xs font-bold">
                   12
@@ -142,31 +146,31 @@ const InteractiveMap = () => {
                 </div>
                 
                 {/* Map Controls */}
-                <div className="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2">
-                  <div className="flex flex-col space-y-2">
-                    <button className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-[var(--primary)]">
-                      <i className="ri-add-line ri-lg"></i>
+                <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-white rounded-lg shadow-md p-1 md:p-2">
+                  <div className="flex flex-col space-y-1 md:space-y-2">
+                    <button className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center text-gray-600 hover:text-[var(--primary)]">
+                      <i className="ri-add-line ri-sm md:ri-lg"></i>
                     </button>
                     <div className="w-full h-px bg-gray-200"></div>
-                    <button className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-[var(--primary)]">
-                      <i className="ri-subtract-line ri-lg"></i>
+                    <button className="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center text-gray-600 hover:text-[var(--primary)]">
+                      <i className="ri-subtract-line ri-sm md:ri-lg"></i>
                     </button>
                   </div>
                 </div>
                 
                 {/* Map Legend */}
-                <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-md p-3">
-                  <div className="text-sm font-medium mb-2">Legend</div>
+                <div className="absolute bottom-2 left-2 md:bottom-4 md:left-4 bg-white rounded-lg shadow-md p-2 md:p-3">
+                  <div className="text-xs md:text-sm font-medium mb-1 md:mb-2">Legend</div>
                   <div className="flex items-center mb-1">
-                    <div className="w-3 h-3 bg-[var(--primary)] rounded-full mr-2"></div>
+                    <div className="w-2 h-2 md:w-3 md:h-3 bg-[var(--primary)] rounded-full mr-1 md:mr-2"></div>
                     <span className="text-xs text-gray-600">Software Communities</span>
                   </div>
                   <div className="flex items-center mb-1">
-                    <div className="w-3 h-3 bg-[var(--secondary)] rounded-full mr-2"></div>
+                    <div className="w-2 h-2 md:w-3 md:h-3 bg-[var(--secondary)] rounded-full mr-1 md:mr-2"></div>
                     <span className="text-xs text-gray-600">Startup Hubs</span>
                   </div>
                   <div className="flex items-center">
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                    <div className="w-2 h-2 md:w-3 md:h-3 bg-yellow-500 rounded-full mr-1 md:mr-2"></div>
                     <span className="text-xs text-gray-600">Upcoming Events</span>
                   </div>
                 </div>

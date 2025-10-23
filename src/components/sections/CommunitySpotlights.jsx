@@ -15,36 +15,36 @@ const SpotlightCard = ({ community, isReversed = false }) => {
 
   return (
     <div
-      className={`flex flex-col md:flex-row items-center mb-16 gap-8 ${
+      className={`flex flex-col md:flex-row items-center mb-8 sm:mb-12 md:mb-16 lg:mb-20 gap-4 sm:gap-6 md:gap-8 lg:gap-10 ${
         isReversed ? "md:flex-row-reverse" : ""
       }`}
     >
       <div className="w-full md:w-1/2">
-        <h3 className="text-2xl font-bold mb-4">{title}</h3>
-        <p className="text-gray-600 mb-4">{description}</p>
-        <p className="text-gray-600 mb-6">{longDescription}</p>
+        <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">{title}</h3>
+        <p className="text-gray-600 mb-3 md:mb-4 text-sm md:text-base">{description}</p>
+        <p className="text-gray-600 mb-4 md:mb-6 text-sm md:text-base">{longDescription}</p>
 
-        <div className="flex flex-col sm:flex-row gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mb-4 md:mb-6">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="flex items-center bg-gray-50 p-3 rounded-lg"
+              className="flex items-center bg-gray-50 p-2 md:p-3 rounded-lg"
             >
               <div
-                className={`w-10 h-10 flex items-center justify-center ${stat.bgColor} ${stat.textColor} rounded-full mr-3`}
+                className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center ${stat.bgColor} ${stat.textColor} rounded-full mr-2 md:mr-3`}
               >
-                <i className={`${stat.icon} ri-lg`}></i>
+                <i className={`${stat.icon} ri-sm md:ri-lg`}></i>
               </div>
               <div>
-                <div className="text-sm text-gray-500">{stat.label}</div>
-                <div className="font-semibold">{stat.value}</div>
+                <div className="text-xs md:text-sm text-gray-500">{stat.label}</div>
+                <div className="font-semibold text-sm md:text-base">{stat.value}</div>
               </div>
             </div>
           ))}
         </div>
 
         <button
-          className={`px-6 py-3 ${buttonColor} text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center`}
+          className={`px-4 md:px-6 py-2 md:py-3 ${buttonColor} text-white font-medium rounded-button whitespace-nowrap flex items-center justify-center text-sm md:text-base`}
         >
           <i className="ri-profile-line ri-lg mr-2"></i>
           <a href={link}>{buttonText}</a>
@@ -125,13 +125,13 @@ const CommunitySpotlights = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <section className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
+      <div className="container mx-auto">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4">
             Community Spotlights
           </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          <p className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
             Learn about the inspiring stories and achievements of Cameroon's
             leading tech communities.
           </p>

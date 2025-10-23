@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useCommunities } from "../../hooks/useApiV2";
 import { REGIONS, COMMUNITY_TYPES } from "../../utils/constants";
 import LoadingSpinner from "../common/LoadingSpinner";
+import TripleStripeLine from '../common/Underline';
 
 const CommunitiesDirectory = () => {
   const navigate = useNavigate();
@@ -68,27 +70,58 @@ const CommunitiesDirectory = () => {
 
   const filteredCommunities = data?.communities || [];
 
+  const headingVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
+  const paragraphVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut", delay: 0.2 },
+    },
+  };
+
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2
+    <section className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-white">
+      <div className="container mx-auto">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+          <motion.h2
             id="communities-directory"
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+            variants={headingVariants}
           >
             Communities Directory
-          </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto">
+          </motion.h2>
+          <div className="mb-4">
+            <TripleStripeLine width="w-1/6" height="h-2" className="mx-auto" colors={["bg-green-500", "bg-red-500", "bg-yellow-500"]}/>
+          </div>
+          <motion.p
+            className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.5 }}
+            variants={paragraphVariants}
+          >
             Browse our comprehensive directory of tech communities across
             Cameroon. Filter by region, category, or search for specific groups.
-          </p>
+          </motion.p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8 lg:gap-10">
           {/* Filters Sidebar */}
-          <div className="w-full md:w-1/4 bg-gray-50 rounded-lg p-6">
-            <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-4">Search</h3>
+          <div className="w-full lg:w-1/4 bg-gray-50 rounded-lg p-3 sm:p-4 md:p-5 lg:p-6">
+            <div className="mb-4 md:mb-6">
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Search</h3>
               <div className="relative">
                 <input
                   type="text"
@@ -103,8 +136,8 @@ const CommunitiesDirectory = () => {
               </div>
             </div>
 
-            <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-4">Regions</h3>
+            <div className="mb-4 md:mb-6">
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Regions</h3>
               <div className="space-y-2">
                 {REGIONS.map((region) => (
                   <div key={region} className="flex items-center">
@@ -128,8 +161,8 @@ const CommunitiesDirectory = () => {
               </div>
             </div>
 
-            <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-4">Categories</h3>
+            <div className="mb-4 md:mb-6">
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Categories</h3>
               <div className="space-y-2">
                 {COMMUNITY_TYPES.map((category) => (
                   <div key={category} className="flex items-center">
@@ -153,8 +186,8 @@ const CommunitiesDirectory = () => {
               </div>
             </div>
 
-            <div className="mb-6">
-              <h3 className="font-semibold text-lg mb-4">Member Size</h3>
+            <div className="mb-4 md:mb-6">
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Member Size</h3>
               <input
                 type="range"
                 min="0"
@@ -178,7 +211,7 @@ const CommunitiesDirectory = () => {
           </div>
 
           {/* Communities Grid */}
-          <div className="w-full md:w-3/4">
+          <div className="w-full lg:w-3/4">
             {loading ? (
               <div className="flex justify-center items-center h-64">
                 <LoadingSpinner size="large" />
@@ -189,25 +222,26 @@ const CommunitiesDirectory = () => {
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
                   {filteredCommunities.map((community) => (
                     <div
                       key={community.id}
-                      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
+                      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 cursor-pointer"
+                      onClick={() => handleViewProfile(community.id)}
                     >
-                      <div className="h-40 bg-[#FFFFFF] flex items-center justify-center">
+                      <div className="h-32 md:h-40 bg-[#FFFFFF] flex items-center justify-center">
                         <img
                           src={community.logo}
                           alt={community.name}
-                          className="h-24 object-contain"
+                          className="h-16 md:h-24 object-contain"
                           loading="lazy"
                         />
                       </div>
-                      <div className="p-5">
-                        <h3 className="font-bold text-xl mb-2">
+                      <div className="p-3 md:p-5">
+                        <h3 className="font-bold text-lg md:text-xl mb-2 cursor-pointer hover:text-[var(--primary)]" onClick={() => handleViewProfile(community.id)}>
                           {community.name}
                         </h3>
-                        <div className="flex items-center text-gray-500 mb-3">
+                        <div className="flex text-gray-500 mb-3">
                           <i className="ri-map-pin-line mr-1"></i>
                           <span className="text-sm">{community.description}</span>
                         </div>
@@ -241,12 +275,7 @@ const CommunitiesDirectory = () => {
                             ))}
                           </div>
                         )}
-                        <button
-                          onClick={() => handleViewProfile(community.id)}
-                          className="w-full px-4 py-2 bg-[var(--primary)] text-white rounded-button whitespace-nowrap"
-                        >
-                          <a href={community.links}> Explore Community</a>
-                        </button>
+                    
                       </div>
                     </div>
                   ))}

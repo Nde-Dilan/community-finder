@@ -100,15 +100,7 @@ const SimilarCommunities = ({ currentCommunityId }) => {
                   </div>
                 )}
 
-                <button
-                  className="w-full px-4 py-2 bg-[var(--primary)] text-white rounded-button font-medium hover:bg-[var(--primary)]/90 transition-colors"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleViewCommunity(community.id);
-                  }}
-                >
-                  View Community
-                </button>
+               
               </div>
             </div>
           ))}
