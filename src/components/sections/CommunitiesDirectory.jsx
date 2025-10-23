@@ -65,7 +65,14 @@ const CommunitiesDirectory = () => {
   };
 
   const handleViewProfile = (community) => {
-    navigate(community.links);
+    if (
+      typeof community.links === "string" &&
+      (community.links.startsWith("http://") || community.links.startsWith("https://"))
+    ) {
+      window.location.href = community.links;
+    } else {
+      navigate(community.links);
+    }
   };
 
   const filteredCommunities = data?.communities || [];
