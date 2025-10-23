@@ -64,8 +64,15 @@ const CommunitiesDirectory = () => {
     });
   };
 
-  const handleViewProfile = (communityId) => {
-    navigate(`/community/${communityId}`);
+  const handleViewProfile = (community) => {
+    if (
+      typeof community.links === "string" &&
+      (community.links.startsWith("http://") || community.links.startsWith("https://"))
+    ) {
+      window.location.href = community.links;
+    } else {
+      navigate(community.links);
+    }
   };
 
   const filteredCommunities = data?.communities || [];
@@ -227,7 +234,7 @@ const CommunitiesDirectory = () => {
                     <div
                       key={community.id}
                       className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 cursor-pointer"
-                      onClick={() => handleViewProfile(community.id)}
+                      onClick={() => handleViewProfile(community)}
                     >
                       <div className="h-32 md:h-40 bg-[#FFFFFF] flex items-center justify-center">
                         <img
