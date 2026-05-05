@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import { useApi } from '../hooks/useApi';
-import { fetchNews } from '../services/api';
-import LoadingSpinner from '../components/common/LoadingSpinner';
-import { NEWS_CATEGORIES } from '../utils/constants';
+import React, { useState } from "react";
+import { useNews } from "../hooks/useApiV2";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { NEWS_CATEGORIES } from "../utils/constants";
 
 const NewsPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All Categories');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const { data, loading, error } = useApi(fetchNews, []);
+  const { data, loading, error } = useNews({}, { cache: true });
 
   const news = data?.news || [];
 
-  const filteredNews = news.filter(article => {
-    const matchesCategory = selectedCategory === 'All Categories' || article.category === selectedCategory;
-    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredNews = news.filter((article) => {
+    const matchesCategory =
+      selectedCategory === "All Categories" ||
+      article.category === selectedCategory;
+    const matchesSearch =
+      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -25,7 +27,8 @@ const NewsPage = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Tech Community News</h1>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            Stay updated with the latest happenings, achievements, and announcements from Cameroon's tech ecosystem.
+            Stay updated with the latest happenings, achievements, and
+            announcements from Cameroon's tech ecosystem.
           </p>
         </div>
 
@@ -34,9 +37,11 @@ const NewsPage = () => {
             <div className="sticky top-24">
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h3 className="font-semibold text-lg mb-4">Filter News</h3>
-                
+
                 <div className="mb-6">
-                  <label className="block text-gray-700 font-medium mb-2">Search News</label>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Search News
+                  </label>
                   <div className="relative">
                     <input
                       type="text"
@@ -50,15 +55,19 @@ const NewsPage = () => {
                 </div>
 
                 <div className="mb-6">
-                  <label className="block text-gray-700 font-medium mb-2">Category</label>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Category
+                  </label>
                   <select
                     className="w-full border border-gray-300 rounded-lg px-3 py-2"
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                   >
                     <option value="All Categories">All Categories</option>
-                    {NEWS_CATEGORIES.map(category => (
-                      <option key={category} value={category}>{category}</option>
+                    {NEWS_CATEGORIES.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -78,7 +87,10 @@ const NewsPage = () => {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredNews.map((article) => (
-                  <div key={article.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                  <div
+                    key={article.id}
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
+                  >
                     <img
                       src={article.image}
                       alt={article.title}
@@ -90,7 +102,9 @@ const NewsPage = () => {
                         <i className="ri-calendar-line mr-1"></i>
                         <span className="text-sm">{article.date}</span>
                       </div>
-                      <h3 className="font-bold text-xl mb-3">{article.title}</h3>
+                      <h3 className="font-bold text-xl mb-3">
+                        {article.title}
+                      </h3>
                       <p className="text-gray-600 mb-4">{article.excerpt}</p>
                       <div className="flex items-center text-[var(--primary)] cursor-pointer">
                         <span className="font-medium">Read More</span>
@@ -105,7 +119,9 @@ const NewsPage = () => {
             {filteredNews.length === 0 && !loading && (
               <div className="text-center py-12">
                 <i className="ri-newspaper-line ri-3x text-gray-400 mb-4"></i>
-                <p className="text-gray-600">No news articles found matching your criteria.</p>
+                <p className="text-gray-600">
+                  No news articles found matching your criteria.
+                </p>
               </div>
             )}
           </div>

@@ -11,7 +11,6 @@ import EventsPage from "./pages/EventsPage";
 import NewsPage from "./pages/NewsPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import BackendTestComponent from "./components/BackendTestComponent";
 import "./styles/index.css";
 import LocalGems from "./pages/LocalGemsPage";
 
@@ -28,7 +27,6 @@ function App() {
             {/* <Route path="/events" element={<EventsPage />} /> */}
             {/* <Route path="/news" element={<NewsPage />} /> */}
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/test-backend" element={<BackendTestComponent />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

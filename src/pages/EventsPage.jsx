@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
-import { useApi } from '../hooks/useApi';
-import { fetchEvents } from '../services/api';
-import FilterSidebar from '../components/ui/FilterSidebar';
-import LoadingSpinner from '../components/common/LoadingSpinner';
-import { EVENT_TYPES } from '../utils/constants';
+import React, { useState } from "react";
+import { useEvents } from "../hooks/useApiV2";
+import FilterSidebar from "../components/ui/FilterSidebar";
+import LoadingSpinner from "../components/common/LoadingSpinner";
+import { EVENT_TYPES } from "../utils/constants";
 
 const EventsPage = () => {
   const [filters, setFilters] = useState({
-    searchQuery: '',
-    selectedRegions: ['All Regions'],
+    searchQuery: "",
+    selectedRegions: ["All Regions"],
     selectedCategories: EVENT_TYPES,
-    dateRange: 'upcoming'
+    dateRange: "upcoming",
   });
 
-  const { data, loading, error } = useApi(fetchEvents, []);
+  const { data, loading, error } = useEvents(filters, { cache: true });
 
   const handleFiltersChange = (newFilters) => {
     setFilters(newFilters);
@@ -27,7 +26,8 @@ const EventsPage = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">Tech Events in Cameroon</h1>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            Discover upcoming tech events, workshops, conferences, and meetups happening across Cameroon's vibrant tech ecosystem.
+            Discover upcoming tech events, workshops, conferences, and meetups
+            happening across Cameroon's vibrant tech ecosystem.
           </p>
         </div>
 
@@ -36,39 +36,57 @@ const EventsPage = () => {
             <div className="sticky top-24">
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h3 className="font-semibold text-lg mb-4">Filter Events</h3>
-                
+
                 <div className="mb-6">
-                  <label className="block text-gray-700 font-medium mb-2">Search Events</label>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Search Events
+                  </label>
                   <div className="relative">
                     <input
                       type="text"
                       placeholder="Search events..."
                       className="w-full bg-white border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/20"
                       value={filters.searchQuery}
-                      onChange={(e) => handleFiltersChange({...filters, searchQuery: e.target.value})}
+                      onChange={(e) =>
+                        handleFiltersChange({
+                          ...filters,
+                          searchQuery: e.target.value,
+                        })
+                      }
                     />
                     <i className="ri-search-line absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                   </div>
                 </div>
 
                 <div className="mb-6">
-                  <label className="block text-gray-700 font-medium mb-2">Event Type</label>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Event Type
+                  </label>
                   <div className="space-y-2">
-                    {EVENT_TYPES.map(type => (
+                    {EVENT_TYPES.map((type) => (
                       <div key={type} className="flex items-center">
                         <input
                           type="checkbox"
                           className="custom-checkbox mr-2"
-                          id={`type-${type.toLowerCase().replace(/\s+/g, '-')}`}
+                          id={`type-${type.toLowerCase().replace(/\s+/g, "-")}`}
                           checked={filters.selectedCategories.includes(type)}
                           onChange={() => {
-                            const newCategories = filters.selectedCategories.includes(type)
-                              ? filters.selectedCategories.filter(c => c !== type)
-                              : [...filters.selectedCategories, type];
-                            handleFiltersChange({...filters, selectedCategories: newCategories});
+                            const newCategories =
+                              filters.selectedCategories.includes(type)
+                                ? filters.selectedCategories.filter(
+                                    (c) => c !== type,
+                                  )
+                                : [...filters.selectedCategories, type];
+                            handleFiltersChange({
+                              ...filters,
+                              selectedCategories: newCategories,
+                            });
                           }}
                         />
-                        <label htmlFor={`type-${type.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-600">
+                        <label
+                          htmlFor={`type-${type.toLowerCase().replace(/\s+/g, "-")}`}
+                          className="text-gray-600"
+                        >
                           {type}
                         </label>
                       </div>
@@ -77,11 +95,18 @@ const EventsPage = () => {
                 </div>
 
                 <div className="mb-6">
-                  <label className="block text-gray-700 font-medium mb-2">Date Range</label>
+                  <label className="block text-gray-700 font-medium mb-2">
+                    Date Range
+                  </label>
                   <select
                     className="w-full border border-gray-300 rounded-lg px-3 py-2"
                     value={filters.dateRange}
-                    onChange={(e) => handleFiltersChange({...filters, dateRange: e.target.value})}
+                    onChange={(e) =>
+                      handleFiltersChange({
+                        ...filters,
+                        dateRange: e.target.value,
+                      })
+                    }
                   >
                     <option value="upcoming">Upcoming Events</option>
                     <option value="this-week">This Week</option>
@@ -105,21 +130,32 @@ const EventsPage = () => {
             ) : (
               <div className="space-y-6">
                 {events.map((event) => (
-                  <div key={event.id} className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                  <div
+                    key={event.id}
+                    className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition"
+                  >
                     <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                        <p className="text-gray-600 mb-3">{event.description}</p>
+                        <h3 className="text-xl font-bold mb-2">
+                          {event.title}
+                        </h3>
+                        <p className="text-gray-600 mb-3">
+                          {event.description}
+                        </p>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        event.type === 'primary' ? 'bg-[var(--primary)]/10 text-[var(--primary)]' :
-                        event.type === 'secondary' ? 'bg-[var(--secondary)]/10 text-[var(--secondary)]' :
-                        'bg-yellow-500/10 text-yellow-600'
-                      }`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${
+                          event.type === "primary"
+                            ? "bg-[var(--primary)]/10 text-[var(--primary)]"
+                            : event.type === "secondary"
+                              ? "bg-[var(--secondary)]/10 text-[var(--secondary)]"
+                              : "bg-yellow-500/10 text-yellow-600"
+                        }`}
+                      >
                         {event.type}
                       </span>
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                       <div className="flex items-center text-gray-600">
                         <i className="ri-calendar-line mr-2"></i>

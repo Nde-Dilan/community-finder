@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { useCommunities } from "../../hooks/useApiV2";
 import { REGIONS, COMMUNITY_TYPES } from "../../utils/constants";
 import LoadingSpinner from "../common/LoadingSpinner";
-import TripleStripeLine from '../common/Underline';
+import CommunityModal from "../ui/CommunityModal";
+import TripleStripeLine from "../common/Underline";
 
 const CommunitiesDirectory = () => {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ const CommunitiesDirectory = () => {
   const [selectedRegions, setSelectedRegions] = useState(["All Regions"]);
   const [selectedCategories, setSelectedCategories] = useState(COMMUNITY_TYPES);
   const [memberSizeFilter, setMemberSizeFilter] = useState(0);
+  const [selectedCommunity, setSelectedCommunity] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Create dynamic filters object for the API
   const filters = useMemo(
@@ -26,7 +29,7 @@ const CommunitiesDirectory = () => {
           : selectedCategories[0],
       minMembers: memberSizeFilter || undefined,
     }),
-    [searchQuery, selectedRegions, selectedCategories, memberSizeFilter]
+    [searchQuery, selectedRegions, selectedCategories, memberSizeFilter],
   );
 
   const { data, loading, error } = useCommunities(filters, {
@@ -51,7 +54,7 @@ const CommunitiesDirectory = () => {
     setSelectedCategories((prev) =>
       prev.includes(category)
         ? prev.filter((c) => c !== category)
-        : [...prev, category]
+        : [...prev, category],
     );
   };
 
@@ -65,14 +68,8 @@ const CommunitiesDirectory = () => {
   };
 
   const handleViewProfile = (community) => {
-    if (
-      typeof community.links === "string" &&
-      (community.links.startsWith("http://") || community.links.startsWith("https://"))
-    ) {
-      window.location.href = community.links;
-    } else {
-      navigate(community.links);
-    }
+    setSelectedCommunity(community);
+    setIsModalOpen(true);
   };
 
   const filteredCommunities = data?.communities || [];
@@ -110,7 +107,12 @@ const CommunitiesDirectory = () => {
             Communities Directory
           </motion.h2>
           <div className="mb-4">
-            <TripleStripeLine width="w-1/6" height="h-2" className="mx-auto" colors={["bg-green-500", "bg-red-500", "bg-yellow-500"]}/>
+            <TripleStripeLine
+              width="w-1/6"
+              height="h-2"
+              className="mx-auto"
+              colors={["bg-green-500", "bg-red-500", "bg-yellow-500"]}
+            />
           </div>
           <motion.p
             className="text-gray-600 max-w-3xl mx-auto text-sm sm:text-base"
@@ -128,7 +130,9 @@ const CommunitiesDirectory = () => {
           {/* Filters Sidebar */}
           <div className="w-full lg:w-1/4 bg-gray-50 rounded-lg p-3 sm:p-4 md:p-5 lg:p-6">
             <div className="mb-4 md:mb-6">
-              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Search</h3>
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">
+                Search
+              </h3>
               <div className="relative">
                 <input
                   type="text"
@@ -144,7 +148,9 @@ const CommunitiesDirectory = () => {
             </div>
 
             <div className="mb-4 md:mb-6">
-              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Regions</h3>
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">
+                Regions
+              </h3>
               <div className="space-y-2">
                 {REGIONS.map((region) => (
                   <div key={region} className="flex items-center">
@@ -169,7 +175,9 @@ const CommunitiesDirectory = () => {
             </div>
 
             <div className="mb-4 md:mb-6">
-              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Categories</h3>
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">
+                Categories
+              </h3>
               <div className="space-y-2">
                 {COMMUNITY_TYPES.map((category) => (
                   <div key={category} className="flex items-center">
@@ -194,7 +202,9 @@ const CommunitiesDirectory = () => {
             </div>
 
             <div className="mb-4 md:mb-6">
-              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">Member Size</h3>
+              <h3 className="font-semibold text-base md:text-lg mb-3 md:mb-4">
+                Member Size
+              </h3>
               <input
                 type="range"
                 min="0"
@@ -245,12 +255,14 @@ const CommunitiesDirectory = () => {
                         />
                       </div>
                       <div className="p-3 md:p-5">
-                        <h3 className="font-bold text-lg md:text-xl mb-2 cursor-pointer hover:text-[var(--primary)]" onClick={() => handleViewProfile(community.id)}>
+                        <h3 className="font-bold text-lg md:text-xl mb-2 cursor-pointer hover:text-[var(--primary)]">
                           {community.name}
                         </h3>
                         <div className="flex text-gray-500 mb-3">
                           <i className="ri-map-pin-line mr-1"></i>
-                          <span className="text-sm">{community.description}</span>
+                          <span className="text-sm">
+                            {community.description}
+                          </span>
                         </div>
                         <div className="flex items-center text-gray-500 mb-3">
                           <i className="ri-user-line mr-1"></i>
@@ -267,14 +279,14 @@ const CommunitiesDirectory = () => {
                                   index % 6 === 0
                                     ? "bg-blue-100 text-blue-800"
                                     : index % 6 === 1
-                                    ? "bg-green-100 text-green-800"
-                                    : index % 6 === 2
-                                    ? "bg-purple-100 text-purple-800"
-                                    : index % 6 === 3
-                                    ? "bg-red-100 text-red-800"
-                                    : index % 6 === 4
-                                    ? "bg-yellow-100 text-yellow-800"
-                                    : "bg-indigo-100 text-indigo-800"
+                                      ? "bg-green-100 text-green-800"
+                                      : index % 6 === 2
+                                        ? "bg-purple-100 text-purple-800"
+                                        : index % 6 === 3
+                                          ? "bg-red-100 text-red-800"
+                                          : index % 6 === 4
+                                            ? "bg-yellow-100 text-yellow-800"
+                                            : "bg-indigo-100 text-indigo-800"
                                 }`}
                               >
                                 {tag}
@@ -282,7 +294,6 @@ const CommunitiesDirectory = () => {
                             ))}
                           </div>
                         )}
-                    
                       </div>
                     </div>
                   ))}
@@ -299,6 +310,12 @@ const CommunitiesDirectory = () => {
           </div>
         </div>
       </div>
+
+      <CommunityModal
+        community={selectedCommunity}
+        onClose={() => setIsModalOpen(false)}
+        isOpen={isModalOpen}
+      />
     </section>
   );
 };

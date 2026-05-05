@@ -1,4 +1,4 @@
-import { getBackend } from "./backend/BackendFactory.js";
+import { MockBackend } from "./backend/MockBackend.js";
 import { COLLECTION_NAMES } from "./backend/types.js";
 
 // New API service that uses the backend interface
@@ -9,7 +9,8 @@ export class ApiService {
 
   async initialize() {
     if (!this.backend) {
-      this.backend = await getBackend();
+      this.backend = new MockBackend();
+      await this.backend.initialize();
     }
     return this.backend;
   }
@@ -21,7 +22,7 @@ export class ApiService {
 
     if (!result.success) {
       throw new Error(
-        result.error?.message || "Failed to fetch featured communities"
+        result.error?.message || "Failed to fetch featured communities",
       );
     }
 
@@ -45,7 +46,7 @@ export class ApiService {
 
     if (!result.success) {
       throw new Error(
-        result.error?.message || "Failed to fetch community details"
+        result.error?.message || "Failed to fetch community details",
       );
     }
 
@@ -60,7 +61,7 @@ export class ApiService {
 
     if (!result.success) {
       throw new Error(
-        result.error?.message || "Failed to fetch similar communities"
+        result.error?.message || "Failed to fetch similar communities",
       );
     }
 
@@ -85,7 +86,7 @@ export class ApiService {
 
     if (!result.success) {
       throw new Error(
-        result.error?.message || "Failed to fetch upcoming events"
+        result.error?.message || "Failed to fetch upcoming events",
       );
     }
 
@@ -144,7 +145,7 @@ export class ApiService {
 
     if (!result.success) {
       throw new Error(
-        result.error?.message || "Failed to subscribe to newsletter"
+        result.error?.message || "Failed to subscribe to newsletter",
       );
     }
 
